@@ -1,0 +1,34 @@
+﻿zhuyuan
+
+{
+	"header": {
+		"message": "success!",
+		"status": "300"
+	},
+	"body": [{
+		"org_id": "000002",//医院名称
+		"physician_doctor_sign": "邓娅莉",//医生姓名
+		"inp_date": "2015-04-22 08:30:00.0",//住院时间
+		"inp_dept_name": "妇科",//科室名称
+		"dishospital_date": "2015-04-25 08:10:00.0",//出院时间
+		"diag_name": ""//诊断名称
+		"advice_item_content": "",//医嘱
+	}]
+}
+
+
+menzhen
+
+{
+	"header": {
+		"message": "success!",
+		"status": "300"
+	},
+	"body": [{
+		"org_id": "000002",//医院名称
+		"visit_datetime": "2015-03-04 15:07:05.0",//门诊时间
+		"dept_name": "FKMZ-妇科门诊",//科室名称
+		"diag_name": "卵巢囊肿",//诊断名称
+		"doctor_sign": "符淳"//医生姓名
+	}]
+}

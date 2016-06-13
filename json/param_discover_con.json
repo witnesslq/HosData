@@ -1,0 +1,27 @@
+﻿{
+  "paramlist": [
+    {
+      "pageinfo": {
+        "switch": "and",
+        "currentpage": 1,
+        "pagesize": 10
+      }
+    },
+    {
+      "org_patient_info": [
+        {
+          "conf_scope": "3",
+          "patient_name": "2011,2033"
+        },
+        {
+          "conf_scope": "2",
+          "patient_name": "附二"
+        },
+        {
+          "conf_scope": "3",
+          "patient_name": "2011,2033"
+        }
+      ]
+    }
+  ]
+}

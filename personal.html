@@ -1,0 +1,389 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="renderer" content="webkit" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>个人中心</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+    <link href="css/main.css" rel="stylesheet" />
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.min.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body class="peo-body">
+    <div class="p-header">
+        <div class="con">
+            <a href="index.html" class="logo pull-left"><img src="imgs/logo.png" alt="中南大学湘雅医学大数据平台" /></a>
+            <div class="info pull-right">
+                <a class="notice"><span class="m-badge">12</span><i></i></a>
+                <a class="user">Ammei</a>
+                <a class="exit">退出</a>
+            </div>
+        </div>
+    </div>
+    <section class="content clearfix">
+        <div class="leftside pull-left">
+            <h2>个人中心</h2>
+            <dl class="my-aplly active my-open">
+                <dt>我的应用</dt>
+                <dd class="active" data-con="my_apply_con_01"><span>---</span>我的应用</dd>
+            </dl>
+            <dl class="data-summary">
+                <dt>数据概述</dt>
+                <dd data-con="data_summary_con" dept_name="心血管内科"><span>---</span>心血管内科</dd>
+                <dd data-con="data_summary_con" dept_name="神经内科"><span>---</span>神经内科</dd>
+                <dd data-con="data_summary_con" dept_name="内分秘科"><span>---</span>内分秘科</dd>
+                <dd data-con="data_summary_con" dept_name="肾内科"><span>---</span>肾内科</dd>
+                <dd data-con="data_summary_con" dept_name="呼吸内科"><span>---</span>呼吸内科</dd>
+                <dd data-con="data_summary_con" dept_name="消化内科"><span>---</span>消化内科</dd>
+                <dd data-con="data_summary_con" dept_name="血液内科"><span>---</span>血液内科</dd>
+                <dd data-con="data_summary_con" dept_name="神经内科"><span>---</span>神经内科</dd>
+                <dd data-con="data_summary_con" dept_name="风湿免疫内科"><span>---</span>风湿免疫内科</dd>
+                <dd data-con="data_summary_con" dept_name="骨科"><span>---</span>骨科</dd>
+                <dd data-con="data_summary_con" dept_name="神经内科"><span>---</span>神经内科</dd>
+            </dl>
+            <dl class="data-discover">
+                <dt>数据探索</dt>
+                <dd data-con="data_discover_con"><span>---</span>数据探索</dd>
+            </dl>
+            <dl class="user-center">
+                <dt>帐号中心</dt>
+                <dd><span>---</span>帐号信息</dd>
+                <dd><span>---</span>帐号管理</dd>
+                <dd><span>---</span>重置密码</dd>
+                <dd><span>---</span>隐私设置</dd>
+            </dl>
+            <dl class="sys-notice">
+                <dt>系统通知</dt>
+                <dd><span>---</span>系统通知</dd>
+            </dl>
+            <dl class="help-center">
+                <dt>帮助中心</dt>
+                <dd><span>---</span>帮助中心</dd>
+            </dl>
+        </div>
+        <!--我的应用开始-->
+        <div id="my_apply_con_01" class="center active pull-left my-apply-con-01">
+            <ul class="list-inline m-nav">
+                <li>首页</li>
+                <li>个人中心</li>
+                <li class="last">我的应用</li>
+            </ul>
+            <ul class="itembox clearfix">
+                <li class="li_01"><a>门脉高压</a></li>
+                <li class="li_02"><a>抑郁障碍临床</a></li>
+                <li class="li_03"><a>呼吸内科</a></li>
+                <li class="li_04"><a>抑郁障碍临床</a></li>
+                <li class="li_05"><a>皮肤病</a></li>
+                <li class="li_06"><a>眼科</a></li>
+                <li class="li_07"><a>神经外科</a></li>
+                <li class="li_08"><a>消化道内科</a></li>
+                <li class="li_09"><a>内科</a></li>
+                <li class="more"><a>更多>>></a></li>
+            </ul>
+        </div>
+        <!--我的应用结束-->
+        <!--数据概述 心血管内科开始-->
+        <div id="data_summary_con" class="center pull-left data-summary-con">
+            <ul class="list-inline m-nav">
+                <li>首页</li>
+                <li>个人中心</li>
+                <li class="last">数据概述</li>
+            </ul>
+            <ul class="clearfix numsul">
+                <li>患者数量：<span class="patients">5，230</span></li>
+                <li>病例数量：<span class="mrecords">23，650</span></li>
+                <li>手术例数：<span class="operations">530</span></li>
+                <li>门诊记录：<span class="outpatient">34，212</span></li>
+                <li>检查记录：<span class="checks">312，564</span></li>
+                <li>检验记录：<span class="tests">321，546</span></li>
+                <li>住院比例：<span class="inhospital_per">85%</span></li>
+                <li>住院记录：<span class="inhospitals">821323</span></li>
+                <li>医嘱数量：<span class="prescrib">34，212</span></li>
+                <li>死亡数量：<span class="deads">320</span></li>
+            </ul>
+            <h2>患者年龄分布</h2>
+            <div id="data_summary_con_chart01" style="width:695px;height:490px;padding:10px 30px 25px 15px;"></div>
+            <h2>性别比例</h2>
+            <div id="data_summary_con_chart02" style="display:inline-block; width:185px;height:185px;margin-left:145px;"></div>
+            <img class="pull-right seximg" src="imgs/img41.png" alt="男女比例" />
+            <h2>地域分布</h2>
+            <div id="data_summary_con_chart03" style="width:695px;height:500px;"></div>
+        </div>
+        <!--数据概述 心血管内科结束-->
+        <!--数据探索开始-->
+        <div id="data_discover_con" class="center pull-left data-discover-con">
+            <ul class="list-inline m-nav">
+                <li>首页</li>
+                <li>个人中心</li>
+                <li class="last">数据探索</li>
+            </ul>
+            <div class="search-pt hide">
+                <input type="text" placeholder="结节性甲状腺肿块" /><span class="glyphicon glyphicon-search"></span><a class="btn-searchpt">搜索</a><a class="btn-searchgj">高级搜索</a>
+            </div>
+            <div class="search-gj">
+                <h3>常规特征</h3>
+                <div class="search-box">
+                    <select id="data_discover_gjconf" class="onesel">
+                        <option value="and">并且</option>
+                        <option value="or">或者</option>
+                    </select>
+                    <input class="oneinput" readonly="" type="text">
+                </div>
+                <div class="bar-group">
+                    <a class="add-btn">+&nbsp;&nbsp;添加类目</a>
+                    <a class="search-btn">搜索</a>
+                    <a class="back-pt hide">返回</a>
+                </div>
+            </div>
+            <div class="searchinfo">
+                符合条件的病人共<span id="discover_peos" class="nums">0</span>人
+            </div>
+            <div class="searchres clearfix">
+                <div class="leftside pull-left">
+                    <a href="discover/detail.html?patient_id=aaabbbccc" target="_blank">
+                        <ul class="list-inline titul">
+                            <li>侯xx</li>
+                            <li>女</li>
+                            <li>出生年月&nbsp;&nbsp;<span>1976-12-10</span></li>
+                            <li>病人标识<span>3444216</span></li>
+                            <li>该患者共<span>1</span>份病历</li>
+                        </ul>
+                    </a>
+                    <a href="discover/detail.html" target="_blank">
+                        <ul class="list-inline titul">
+                            <li>郑xx</li>
+                            <li>女</li>
+                            <li>出生年月&nbsp;&nbsp;<span>1966-11-10</span></li>
+                            <li>病人标识<span>3444216</span></li>
+                            <li>该患者共<span>3</span>份病历</li>
+                        </ul>
+                    </a>
+                    <a href="discover/detail.html" target="_blank">
+                        <ul class="list-inline titul">
+                            <li>侯xx</li>
+                            <li>女</li>
+                            <li>出生年月&nbsp;&nbsp;<span>1976-12-10</span></li>
+                            <li>病人标识<span>3444216</span></li>
+                            <li>该患者共<span>1</span>份病历</li>
+                        </ul>
+                    </a>
+                    <a href="discover/detail.html" target="_blank">
+                        <ul class="list-inline titul">
+                            <li>郑xx</li>
+                            <li>女</li>
+                            <li>出生年月&nbsp;&nbsp;<span>1966-11-10</span></li>
+                            <li>病人标识<span>3444216</span></li>
+                            <li>该患者共<span>3</span>份病历</li>
+                        </ul>
+                    </a>
+                    <a href="discover/detail.html" target="_blank">
+                        <ul class="list-inline titul">
+                            <li>侯xx</li>
+                            <li>女</li>
+                            <li>出生年月&nbsp;&nbsp;<span>1976-12-10</span></li>
+                            <li>病人标识<span>3444216</span></li>
+                            <li>该患者共<span>1</span>份病历</li>
+                        </ul>
+                    </a>
+                    <a href="discover/detail.html" target="_blank">
+                        <ul class="list-inline titul">
+                            <li>郑xx</li>
+                            <li>女</li>
+                            <li>出生年月&nbsp;&nbsp;<span>1966-11-10</span></li>
+                            <li>病人标识<span>3444216</span></li>
+                            <li>该患者共<span>3</span>份病历</li>
+                        </ul>
+                    </a>
+                    <a href="discover/detail.html" target="_blank">
+                        <ul class="list-inline titul">
+                            <li>侯xx</li>
+                            <li>女</li>
+                            <li>出生年月&nbsp;&nbsp;<span>1976-12-10</span></li>
+                            <li>病人标识<span>3444216</span></li>
+                            <li>该患者共<span>1</span>份病历</li>
+                        </ul>
+                    </a>
+                    <a href="discover/detail.html" target="_blank">
+                        <ul class="list-inline titul">
+                            <li>郑xx</li>
+                            <li>女</li>
+                            <li>出生年月&nbsp;&nbsp;<span>1966-11-10</span></li>
+                            <li>病人标识<span>3444216</span></li>
+                            <li>该患者共<span>3</span>份病历</li>
+                        </ul>
+                    </a>
+                    <a href="discover/detail.html" target="_blank">
+                        <ul class="list-inline titul">
+                            <li>侯xx</li>
+                            <li>女</li>
+                            <li>出生年月&nbsp;&nbsp;<span>1976-12-10</span></li>
+                            <li>病人标识<span>3444216</span></li>
+                            <li>该患者共<span>1</span>份病历</li>
+                        </ul>
+                    </a>
+                    <a href="discover/detail.html" target="_blank">
+                        <ul class="list-inline titul">
+                            <li>郑xx</li>
+                            <li>女</li>
+                            <li>出生年月&nbsp;&nbsp;<span>1966-11-10</span></li>
+                            <li>病人标识<span>3444216</span></li>
+                            <li>该患者共<span>3</span>份病历</li>
+                        </ul>
+                    </a>
+                </div>
+                <div class="rightside pull-right hide">
+                    <h3>TOP10</h3>
+                    <ul class="tabul clearfix">
+                        <li data-con="top_01" class="active">疾病</li>
+                        <li data-con="top_02">用药</li>
+                        <li data-con="top_03">症状</li>
+                    </ul>
+                    <ul class="tabcon">
+                        <li id="top_01" class="active">
+                            <ul>
+                                <li><a>1、结节性甲状腺肿</a></li>
+                                <li><a>2、高血压病</a></li>
+                                <li><a>3、乙型糖尿病</a></li>
+                                <li><a>4、甲状腺结节</a></li>
+                                <li><a>5、高脂肪症</a></li>
+                                <li><a>6、甲状腺结节</a></li>
+                                <li><a>7、脂肪肝</a></li>
+                                <li><a>8、周围动脉粘性硬化症</a></li>
+                                <li><a>9、脂肪</a></li>
+                                <li><a>10、高血压</a></li>
+                            </ul>
+                        </li>
+                        <li id="top_02">
+                            <ul>
+                                <li><a>1、用药</a></li>
+                                <li><a>2、用药</a></li>
+                                <li><a>3、用药</a></li>
+                                <li><a>4、用药</a></li>
+                                <li><a>5、用药</a></li>
+                                <li><a>6、用药</a></li>
+                                <li><a>7、用药</a></li>
+                                <li><a>8、用药</a></li>
+                                <li><a>9、用药</a></li>
+                                <li><a>10、用药</a></li>
+                            </ul>
+                        </li>
+                        <li id="top_03">
+                            <ul>
+                                <li><a>1、症状</a></li>
+                                <li><a>2、症状</a></li>
+                                <li><a>3、症状</a></li>
+                                <li><a>4、症状</a></li>
+                                <li><a>5、症状</a></li>
+                                <li><a>6、症状</a></li>
+                                <li><a>7、症状</a></li>
+                                <li><a>8、症状</a></li>
+                                <li><a>9、症状</a></li>
+                                <li><a>10、症状</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <nav>
+                    <ul class="pagination clearfix">
+                        <li data-pagenum="1" class="disabled first"><a>首页</a></li>
+                        <li class="disabled prev"><a>&lt;</a></li>
+                        <li class="creatli active"><a>1</a></li>
+                        <li class="creatli"><a>2</a></li>
+                        <li class="creatli"><a>3</a></li>
+                        <li class="creatli"><a>4</a></li>
+                        <li class="creatli"><a>5</a></li>
+                        <li class="next"><a>&gt;</a></li>
+                        <li class="last"><a>尾页</a></li>
+                    </ul>
+                    <div class="inputbox">
+                        <input type="text" value="1" onkeyup="value=value.replace(/[^\d]/g,'')" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))" />页<a>确定</a>
+                    </div>
+                </nav>
+            </div>
+            <!--可搜索条件弹出窗口-->
+            <div class="search-item-box hide">
+                <span class="my-close"></span>
+                <h3>查看全部选项</h3>
+                <input type="text" placeholder="请输入要筛选的关键字" />
+                <div class="search-items">
+                    <ul class="list-unstyled">
+                        <li data-tablename="org_patient_info" data-colname="patient_name">患者姓名</li>
+                        <li data-tablename="org_patient_info" data-colname="sex_name">性别</li>
+                        <li data-tablename="org_patient_info" data-colname="birth_date">出生年月</li>
+                        <li data-tablename="org_patient_info" data-colname="age">年龄</li>
+                        <li data-tablename="org_patient_info" data-colname="patient_id">患者标识</li>
+                        <li data-tablename="org_patient_info" data-colname="nation_name">民族名称</li>
+                    </ul>
+                    <dl>
+                        <dt>门诊信息</dt>
+                        <dd data-tablename="outp_mr" data-colname="org_id">门诊医院</dd>
+                        <dd data-tablename="outp_mr" data-colname="dept_name">门诊科室名称</dd>
+                        <dd data-tablename="outp_mr" data-colname="visit_datetime">就诊日期</dd>
+                        <dd data-tablename="outp_mr" data-colname="chief_complaint">主诉</dd>
+                        <dd data-tablename="outp_mr" data-colname="present_disease_history">现病史</dd>
+                        <dd data-tablename="outp_mr" data-colname="past_history">既往史</dd>
+                        <dd data-tablename="outp_mr" data-colname="physical_exam">体格检查</dd>
+                        <dd data-tablename="outp_mr" data-colname="tcm_four_observations">中医"四诊"观察结果</dd>
+                        <dd data-tablename="outp_diag_info" data-colname="diag_name">诊断名称</dd>
+                        <dd data-tablename="outp_diag_info" data-colname="master_flag">主从诊断</dd>
+                        <dd data-tablename="outp_diag_info" data-colname="treat_result">治愈情况</dd>
+                        <dd data-tablename="outp_diag_info" data-colname="diag_datetime">诊断时间</dd>
+                    </dl>
+                    <dl>
+                        <dt>住院信息</dt>
+                        <dd data-tablename="inp_rec_inp_mr_page" data-colname="physician_doctor_sign">主治医师签名</dd>
+                        <dd data-tablename="inp_rec_inp_mr_page" data-colname="dishospital_way_name">离院方式名称</dd>
+                        <dd data-tablename="inp_rec_inp_mr_page" data-colname="western_or_tcm">中西医标识</dd>
+                        <dd data-tablename="inp_rec_inp_mr_page" data-colname="chief_complaint">住院主诉</dd>
+                        <dd data-tablename="inp_rec_inp_mr_page" data-colname="operation_history">手术史</dd>
+                        <dd data-tablename="inp_rec_inp_mr_page" data-colname="blood_transfusion_history">输血史</dd>
+                        <dd data-tablename="inp_rec_inp_mr_page" data-colname="physicalexam_desc">体格检查-描述</dd>
+                        <dd data-tablename="inp_mr_diag" data-colname="diag_name">诊断名称</dd>
+                        <dd data-tablename="exam_info" data-colname="chief_complaint">检查主诉</dd>
+                        <dd data-tablename="exam_info" data-colname="symptom_desc">症状描述</dd>
+                        <dd data-tablename="exam_info" data-colname="exam_method_name">检查方法名称</dd>
+                        <dd data-tablename="lab_info" data-colname="speciman_type">标本类别</dd>
+                        <dd data-tablename="lab_info" data-colname="lab_item_name">检验方法名称</dd>
+                        <dd data-tablename="general_operation_record" data-colname="operation_name">手术名称</dd>
+                        <dd data-tablename="inp_rec_inp_mr_page" data-colname="org_id">住院医院</dd>
+                        <dd data-tablename="inp_rec_inp_mr_page" data-colname="dept_name">住院科室名称</dd>
+                    </dl>
+                </div>
+            </div>
+            <!--类似百度模糊匹配条件框-->
+            <ul class="bd-search-box list-unstyled hide">
+                <li>住院</li>
+                <li>感冒病例</li>
+                <li>湘雅第一医院</li>
+                <li>人民医院</li>
+                <li>门诊大楼</li>
+            </ul>
+        </div>
+        <!--数据探索结束-->
+        <div class="rightside pull-right">
+            <h2>平台通知</h2>
+            <ul class="list-unstyled">
+                <li><a href="articles/article_detail09.html"><span>·</span>2015-12-10 专注医疗大数据平台建设-技术白皮书</a></li>
+                <li><a href="articles/article_detail10.html"><span>·</span>2015-12-10 云服务启动提供免费大数据分析</a></li>
+            </ul>
+            <img src="imgs/img31.jpg" alt="平台通知" />
+        </div>
+    </section>
+    <div class="p-footer">
+        <div class="con">
+            © 2014-2016中南大学版权所有，并保留所有权利&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ICP 备08011237371号1
+        </div>
+    </div>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap-datetimepicker.min.js"></script>
+    <script src="js/bootstrap-datetimepicker.zh-CN.js"></script>
+    <script src="js/echarts.min.js"></script>
+    <script src="js/common.js"></script>
+    <script src="js/center.js"></script>
+</body>
+</html>

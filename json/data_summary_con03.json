@@ -1,0 +1,10 @@
+﻿{
+  "header": {
+    "message": "success!",
+    "status": "300"
+  },
+  "body": {
+    "man": "67",
+    "woman": "33"
+  }
+}

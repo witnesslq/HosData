@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="renderer" content="webkit" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>登录</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/main.css" rel="stylesheet" />
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.min.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body class="login-body">
+    <div class="header">
+        <div class="h-box">
+            <a href="index.html"><img src="imgs/login_log.png" alt="登录" /></a>
+            <span class="text">欢迎登录</span>
+            <a href="index.html" class="pull-right">返回首页</a>
+        </div>
+    </div>
+    <div class="con clearfix">
+        <div class="pull-left imgdiv"></div>
+        <div class="pull-left input-box">
+            <div class="title">
+                <span>登录账号</span>
+                <a href="register.html" class="pull-right">立即注册</a>
+            </div>
+            <div class="info">
+                请妥善保管好自己的帐号和密码，谨防丢失
+            </div>
+            <div class="has-feedback">
+                <input id="login_user" type="text" class="form-control" placeholder="帐号">
+                <span class="form-control-feedback icon-user"></span>
+            </div>
+            <div class="has-feedback">
+                <input id="login_pass" type="password" class="form-control" placeholder="密码">
+                <span class="form-control-feedback icon-pass"></span>
+            </div>
+            <div class="rempass-box">
+                <lable>
+                    <input type="checkbox" checked="checked" />记住密码
+                </lable>
+                <a class="pull-right">忘记密码?</a>
+                <span id="logininfo" class="logininfo"></span>
+            </div>
+            <a id="login_btn" class="btn btn-block">登&nbsp;&nbsp;录</a>
+        </div>
+    </div>
+    <div class="footer">Copyright 2015 embrancesource.com</div>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
