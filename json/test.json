@@ -1,0 +1,56 @@
+﻿{
+  "header": {
+    "message": "success",
+    "status": "300",
+    "total": 14,
+    "pagesize": 3,
+    "currentpage": 2
+  },
+  "body": [
+    {
+      "org_id": "000002",
+      "menzhen": {
+        "visit_datetime": "2012-03-03 10:21:50.0",
+        "科室标识": "GKMZ-骨科门诊"
+      },
+      "sex_name": "女",
+      "birth_date": "1952-05-28 ",
+      "patient_name": "魏佳利",
+      "zhuyuan": {
+        "inp_date": "2011-11-08 13:30:00.0"
+      },
+      "case": "21",
+      "patient_id": "000002||0001353596"
+    },
+    {
+      "org_id": "000002",
+      "menzhen": {
+        "visit_datetime": "2013-08-21 09:48:49.0",
+        "科室标识": "GKMZ-骨科门诊"
+      },
+      "sex_name": "女",
+      "birth_date": "1949-05-04 ",
+      "patient_name": "舒克英",
+      "zhuyuan": {
+        "inp_date": "2013-08-21 16:30:00.0"
+      },
+      "case": "39",
+      "patient_id": "000002||0001544586"
+    },
+    {
+      "org_id": "000002",
+      "menzhen": {
+        "visit_datetime": "2012-05-15 01:13:45.0",
+        "科室标识": "GKMZ-骨科门诊"
+      },
+      "sex_name": "男",
+      "birth_date": "1929-10-25 ",
+      "patient_name": "王明希",
+      "zhuyuan": {
+        "inp_date": "2012-05-17 15:00:00.0"
+      },
+      "case": "5",
+      "patient_id": "000002||0001727983"
+    }
+  ]
+}

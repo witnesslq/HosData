@@ -16,6 +16,7 @@ function generatePagination($dom, total_page, page_size, current_page) {
         $dom.addClass('hide');
         return false;
     }
+    $dom.removeClass('hide');
     $dom.find('input').val(current_page);
     $dom.find('.creatli').remove();
     var $first = $dom.find('.first');
@@ -40,14 +41,14 @@ function generatePagination($dom, total_page, page_size, current_page) {
                 addliPagination($next, i, current_page);
             }
         } else {
-            for (var i = (current_page - 2) ; i <= (total_page + 2) ; i++) {
+            for (var i = (current_page - 2) ; i <= (current_page + 2) ; i++) {
                 addliPagination($next, i, current_page);
             }
         }
     }
-    $prev.attr('data-pagenum', current_page - 1);
-    $next.attr('data-pagenum', current_page + 1);
-    $last.attr('data-pagenum', total_page);
+    $prev.attr('pagenum', current_page - 1);
+    $next.attr('pagenum', current_page + 1);
+    $last.attr('pagenum', total_page);
     if (current_page == 1) {
         $first.addClass('disabled');
         $prev.addClass('disabled');
@@ -60,7 +61,7 @@ function generatePagination($dom, total_page, page_size, current_page) {
 //分页生成li方法
 function addliPagination($dom, index, current_page) {
     var $li = $('<li>');
-    $li.addClass('creatli').attr('data-pagenum', index);
+    $li.addClass('creatli').attr('pagenum', index);
     if (current_page == index) {
         $li.addClass('active');
     }

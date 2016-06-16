@@ -12,8 +12,13 @@
         $('#' + con_id).addClass('active');
         //数据概述数据初始化
         if (con_id == 'data_summary_con') {
+            var $sexper_chart = $('#data_summary_con_chart02box');
+            $sexper_chart.removeClass('hide');
             var dept_name = $(this).attr('dept_name');//科室名字
-            var $part_01 = $('#data_summary_con .numsul');//数量数据集体化
+            var $part_01 = $('#data_summary_con .numsul');//数量数据集体化对象
+            if (dept_name == '妇科') {
+                $sexper_chart.addClass('hide');
+            }
             //第一部分数据初始化
             var ajaxdata = new Object();
             ajaxdata.dept_name = dept_name;
@@ -392,17 +397,13 @@
                                         }
                                     },
                                 ],
-                                label: {
+                                itemStyle: {
                                     normal: {
-                                        textStyle: {
-                                            color: '#fff'
-                                        }
-                                    }
-                                },
-                                labelLine: {
-                                    normal: {
-                                        lineStyle: {
-                                            color: '#fff'
+                                        label: {
+                                            show: true,
+                                        },
+                                        labelLine: {
+                                            show: false
                                         }
                                     }
                                 }
@@ -482,6 +483,7 @@
             $.getJSON("../json/test.json", function (res) {
                 if (res.header.status == '300') {
                     var res = res.body;
+                    var lastres = [{ 'name': '长沙市', value: 0 }, { 'name': '株洲市', value: 0 }, { 'name': '湘潭市', value: 0 }, { 'name': '衡阳市', value: 0 }, { 'name': '邵阳市', value: 0 }, { 'name': '岳阳市', value: 0 }, { 'name': '常德市', value: 0 }, { 'name': '张家界市', value: 0 }, { 'name': '益阳市', value: 0 }, { 'name': '郴州市', value: 0 }, { 'name': '永州市', value: 0 }, { 'name': '怀化市', value: 0 }, { 'name': '娄底市', value: 0 }, { 'name': '湘西土家族苗族自治州', value: 0 }];
                     for (var i = 0, len = res.length; i < len; i++) {
                         switch (res[i].name) {
                             case 4301:
@@ -524,10 +526,17 @@
                                 res[i].name = '娄底市';
                                 break;
                             case 4331:
-                                res[i].name = '湘西土家族苗族自治州';
+                                res[i].name = '湘西自治州';
                                 break;
                             default:
-                                res[i].name = '长沙市'
+                                res[i].name = '长沙市';
+                        }
+                    };
+                    for (var j = 0, lenj = res.length; j < lenj; j++) {
+                        for (var k = 0, lenk = lastres.length; k < lenk; k++) {
+                            if (lastres[k].name == res[j].name) {
+                                lastres[k].value = res[j].value;
+                            }
                         }
                     };
                     $.getJSON('../json/hunan.json', function (hunanJson) {
@@ -551,7 +560,7 @@
                                         show: true,
                                     }
                                 },
-                                data: res
+                                data: lastres
                             }],
                             visualMap: {
                                 min: 0,
@@ -687,42 +696,7 @@
                 </div>';
     //个人中心，数据探索普通搜索，搜索按钮事件
     $('#data_discover_con').on('click', '.btn-searchpt', function () {
-        var _val = $.trim($(this).siblings('input').val());
-        if (_val) {
-            var paramstr = JSON.stringify({'keyword':_val});
-            //ajax提交获取查询结果
-            $.ajax({
-                type: 'POST',
-                cache: false,
-                data: { 'param': paramstr },
-                url: '',
-                dataType: 'json',
-                success: function (res) {
-                    if (res.header.status == '300') {
-                        $('#discover_peos').text(res.header.total);
-                        var res_box = $('#data_discover_con').find('.searchres .leftside').empty();
-                        var res = res.body;
-                        for (var i = 0, len = res.length; i < len; i++) {
-                            var item = res[i];
-                            var $a = $('<a>').attr({ 'href': 'discover/detail.html?patient_id=' + item.patient_id, 'target': '_blank' });
-                            var $ul = $('<ul class="list-inline titul">\
-                            <li>' + item.patient_name + '</li>\
-                            <li>' + item.sex_name + '</li>\
-                            <li>出生年月&nbsp;&nbsp;<span>' + item.birth_date + '</span></li>\
-                            <li>病人标识<span>' + item.patient_id + '</span></li>\
-                            <li>该患者共<span>' + item.case + '</span>份病历</li>\
-                        </ul>');
-                            $a.append($ul);
-                            var $zy_p = $('<p class="conp">住院时间&nbsp;&nbsp;<span>' + item.zhuyuan.inp_date + '</span></p>');
-                            var $mz_p = $('<p class="conp">看门诊时间&nbsp;&nbsp;<span>' + item.menzhen.visit_datetime + '</span></p>');
-                            $a.append($zy_p);
-                            $a.append($mz_p);
-                            res_box.append($a);
-                        }
-                    }
-                }
-            });
-        }
+        discover_pt_event(1, 10);
     });
     //个人中心，数据探索添加类目
     $('#data_discover_con').on('click', '.search-gj .add-btn', function () {
@@ -743,40 +717,65 @@
     });
     //个人中心，数据探索分页点击事件
     $('#data_discover_con').on('click', '.pagination li:not(.disabled)', function () {
-        var current_page = $(this).data('pagenum');
-        discover_gj_event(current_page, 10);
+        var current_page = $(this).attr('pagenum');
+        if ($('#data_discover_con').find('.search-pt').hasClass('hide')) {
+            discover_gj_event(current_page, 10);
+        } else {
+            discover_pt_event(current_page, 10);
+        }
     });
+    //个人中心，数据探索分页确定按钮点击事件
     $('#data_discover_con').on('click', 'nav .inputbox a', function () {
-        var current_page = $.trim($('#data_discover_con nav .inputbox input').val());
-        var total_page = $.trim($('#data_discover_con .pagination .last').data('pagenum'));
-        if (!current_page) {
+        var current_page = parseInt($.trim($('#data_discover_con nav .inputbox input').val()));
+        var total_page = parseInt($.trim($('#data_discover_con .pagination .last').attr('pagenum')));
+        if (!current_page || current_page == 0) {
             current_page = 1;
         }
         if (current_page > total_page) {
             current_page = total_page;
         }
-        discover_gj_event(current_page, 10);
+        if ($('#data_discover_con').find('.search-pt').hasClass('hide')) {
+            discover_gj_event(current_page, 10);
+        } else {
+            discover_pt_event(current_page, 10);
+        }
     });
     //个人中心，数据探索，高级搜索查询数据事件
-    function discover_gj_event(current_page,page_size) {
+    function discover_gj_event(current_page, page_size) {
         var switch_val = $('#data_discover_gjconf').val();
         var param = {
             "paramlist": [
-                {
-                    "pageinfo": {
-                        "switch": switch_val,
-                        "currentpage": current_page,
-                        "pagesize": page_size
-                    }
-                },
-                { "org_patient_info": [] },
-                { "outp_mr": [] },
-                { "outp_diag_info": [] },
-                { "inp_rec_inp_mr_page": [] },
-                { "inp_mr_diag": [] },
-                { "exam_info": [] },
-                { "lab_info": [] },
-                { "general_operation_record": [] }
+            {
+                "pageinfo": {
+                    "switch": switch_val,
+                    "currentpage": current_page,
+                    "pagesize": page_size
+                }
+            },
+            {
+                "org_patient_info": []
+            },
+            {
+                "outp_mr": []
+            },
+            {
+                "outp_diag_info": []
+            },
+            {
+                "inp_rec_inp_mr_page": []
+            },
+            {
+                "inp_mr_diag": []
+            },
+            {
+                "exam_info": []
+            },
+            {
+                "lab_info": []
+            },
+            {
+                "general_operation_record": []
+            }
             ]
         };
         $('#data_discover_con .search-gj .search-box').each(function (index, item) {
@@ -851,28 +850,114 @@
                 if (res.header.status == '300') {
                     $('#discover_peos').text(res.header.total);
                     var res_box = $('#data_discover_con').find('.searchres .leftside').empty();
-                    var res = res.body;
-                    for (var i = 0, len = res.length; i < len; i++) {
-                        var item = res[i];
+                    var res_array = res.body;
+                    for (var i = 0, len = res_array.length; i < len; i++) {
+                        var item = res_array[i];
+                        var org_name = '湘雅附一';
+                        if (item.org_id == '000001') {
+                            org_name = '湘雅附一';
+                        } else if (item.org_id == '000002') {
+                            org_name = '湘雅附二';
+                        } else if (item.org_id == '000003') {
+                            org_name = '湘雅附三';
+                        }
                         var $a = $('<a>').attr({ 'href': 'discover/detail.html?patient_id=' + item.patient_id, 'target': '_blank' });
                         var $ul = $('<ul class="list-inline titul">\
                             <li>' + item.patient_name + '</li>\
                             <li>' + item.sex_name + '</li>\
-                            <li>出生年月&nbsp;&nbsp;<span>' + item.birth_date + '</span></li>\
-                            <li>病人标识<span>' + item.patient_id + '</span></li>\
+                            <li>出生年月：<span>' + item.birth_date + '</span></li>\
+                            <li>所属医院：<span>' + org_name + '</span></li>\
                             <li>该患者共<span>' + item.case + '</span>份病历</li>\
                         </ul>');
                         $a.append($ul);
-                        var $zy_p = $('<p class="conp">住院时间&nbsp;&nbsp;<span>' + item.zhuyuan.inp_date + '</span></p>');
-                        var $mz_p = $('<p class="conp">看门诊时间&nbsp;&nbsp;<span>' + item.menzhen.visit_datetime + '</span></p>');
-                        $a.append($zy_p);
-                        $a.append($mz_p);
                         res_box.append($a);
-                        generatePagination($('#data_discover_con .pagination .next'), res.header.total, res.header.pagesize, res.header.currentpage);
                     }
+                    var total_page = Math.ceil(parseInt(res.header.total) / parseInt(res.header.pagesize));
+                    if (total_page > 1000) {
+                        total_page = 1000;
+                    }
+                    generatePagination($('#data_discover_con nav'), total_page, res.header.pagesize, res.header.currentpage);
                 }
             }
         });
+    }
+    //个人中心，数据探索，普通搜索查询数据事件
+    function discover_pt_event(current_page, page_size) {
+        var _val = $.trim($('#data_discover_con .btn-searchpt').siblings('input').val());
+        if (_val) {
+            var paramstr = JSON.stringify({
+                "currentpage": current_page, "pagesize": page_size, "searchtxt": _val
+            });
+            //ajax提交获取查询结果
+            $.ajax({
+                type: 'POST',
+                cache: false,
+                data: {
+                    'param': paramstr
+                },
+                url: '/men/getPatientList',
+                dataType: 'json',
+                success: function (res) {
+                    if (res.header.status == '300') {
+                        $('#discover_peos').text(res.header.total);
+                        var res_box = $('#data_discover_con').find('.searchres .leftside').empty();
+                        var res_array = res.body;
+                        for (var i = 0, len = res_array.length; i < len; i++) {
+                            var item = res_array[i];
+                            var org_name = '湘雅附一';
+                            if (item.org_id == '000001') {
+                                org_name = '湘雅附一';
+                            } else if (item.org_id == '000002') {
+                                org_name = '湘雅附二';
+                            } else if (item.org_id == '000003') {
+                                org_name = '湘雅附三';
+                            }
+                            var $a = $('<a>').attr({
+                                'href': 'index/detail.html?patient_id=' + item.patient_id, 'target': '_blank'
+                            });
+                            var $ul = $('<ul class="list-inline titul">\
+                            <li>' + item.patient_name + '</li>\
+                            <li>' + item.sex_name + '</li>\
+                            <li>出生年月：<span>' + item.birth_date + '</span></li>\
+                            <li>所属医院：<span>' + org_name + '</span></li>\
+                            <li>该患者共<span>' + item.case + '</span>份病历</li>\
+                        </ul>');
+                            $a.append($ul);
+                            if (item.menzhen) {
+                                var menzhenobj = item.menzhen;
+                                var $p = $('<p class="conp" >门诊时间：<span class="vtime"></span></p>');
+                                for (var item in menzhenobj) {
+                                    if (item == 'visit_datetime') {
+                                        $p.find('.vtime').text(menzhenobj[item]);
+                                    } else {
+                                        $p.append(item + '&nbsp;&nbsp;' + menzhenobj[item]);
+                                    }
+                                }
+                                $a.append($p);
+                            }
+                            if (item.zhuyuan) {
+                                var zhuyuanobj = item.zhuyuan;
+                                var $p = $('<p class="conp" >住院时间：<span class="vtime"></span></p>');
+                                for (var item in zhuyuanobj) {
+                                    if (item == 'inp_date') {
+                                        $p.find('.vtime').text(zhuyuanobj[item]);
+                                    } else {
+                                        $p.append(item + '&nbsp;&nbsp;' + zhuyuanobj[item]);
+                                    }
+                                }
+                                $a.append($p);
+                            }
+                            res_box.append($a);
+                        }
+                        var total_page = Math.ceil(parseInt(res.header.total) / parseInt(res.header.pagesize));
+                        if (total_page > 1000) {
+                            total_page = 1000;
+                        }
+                        generatePagination($('#data_discover_con nav'), total_page, res.header.pagesize, res.header.currentpage);
+                    }
+                }
+            });
+        }
     }
     //个人中心，数据探索，普通搜索里高级按钮事件
     $('#data_discover_con').on('click', '.search-pt .btn-searchgj', function () {
@@ -908,16 +993,23 @@
     });
     //个人中心，数据探索，全部条件组中第二个输入框键盘输入模糊匹配事件
     $('#data_discover_con').on('keyup', '.search-gj .search-box .twoinput', function () {
-        var val = $.trim($(this).val());
-        bd_ajax_handle(val);
+        var $this = $(this);
+        var val = $.trim($this.val());
+        if (!val) {
+            $('#data_discover_con .bd-search-box').addClass('hide');
+            return false;
+        }
+        var table_name = $this.siblings('.oneinput').data('tablename');
+        var colume_name = $this.siblings('.oneinput').data('colname');
+        bd_ajax_handle(table_name, colume_name, val);
     });
-    function bd_ajax_handle(_val) {
-        var paramstr = JSON.stringify({'keyword':_val});
+    function bd_ajax_handle(table_name, colume_name, _val) {
+        var paramstr = JSON.stringify({ 'table_name': table_name, 'colume_name': colume_name, 'search_value': _val });
         $.ajax({
             type: 'POST',
             cache: false,
             data: { 'param': paramstr },
-            url: '',
+            url: '/men/getSearchList',
             dataType: 'json',
             success: function (res) {
                 if (res.header.status == '300') {
@@ -991,8 +1083,8 @@
             $target.after('<div class="agebox"><input class="agestart m_starttime" type="text" /> 至 <input class="ageend m_endtime" type="text" /></div>');
         } else if (_val == '性别') {
             $target.after('<select class="twosel noswitch"><option value="全部">全部</option><option value="男">男</option><option value="女">女</option></select>');
-        } else if (_val == '医院' || _val == '住院医院') {
-            $target.after('<select class="twosel noswitch"><option value="全部">全部</option><option value="湘雅附一">湘雅附一</option><option value="湘雅附二">湘雅附二</option><option value="湘雅附三">湘雅附三</option></select>');
+        } else if (_val == '医院' || _val == '门诊医院' || _val == '住院医院') {
+            $target.after('<select class="twosel noswitch"><option value="全部">全部</option><option value="000001">湘雅附一</option><option value="000002">湘雅附二</option><option value="000003">湘雅附三</option></select>');
         } else if (_val == '科室名称' || _val == '住院科室') {
             $target.after('<select class="twosel noswitch"><option value="全部">全部</option><option value="心血管内科">心血管内科</option><option value="神经内科">神经内科</option><option value="内分秘科">内分秘科</option><option value="肾内科">肾内科</option><option value="呼吸内科">呼吸内科</option>\
 <option value="呼吸内科">呼吸内科</option><option value="消化内科">消化内科</option><option value="血液内科">血液内科</option><option value="神经内科">神经内科</option><option value="风湿免疫内科">风湿免疫内科</option><option value="骨科">骨科</option><option value="神经内科">神经内科</option></select>');

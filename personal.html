@@ -34,17 +34,21 @@
             </dl>
             <dl class="data-summary">
                 <dt>数据概述</dt>
-                <dd data-con="data_summary_con" dept_name="心血管内科"><span>---</span>心血管内科</dd>
-                <dd data-con="data_summary_con" dept_name="神经内科"><span>---</span>神经内科</dd>
-                <dd data-con="data_summary_con" dept_name="内分秘科"><span>---</span>内分秘科</dd>
-                <dd data-con="data_summary_con" dept_name="肾内科"><span>---</span>肾内科</dd>
-                <dd data-con="data_summary_con" dept_name="呼吸内科"><span>---</span>呼吸内科</dd>
-                <dd data-con="data_summary_con" dept_name="消化内科"><span>---</span>消化内科</dd>
-                <dd data-con="data_summary_con" dept_name="血液内科"><span>---</span>血液内科</dd>
-                <dd data-con="data_summary_con" dept_name="神经内科"><span>---</span>神经内科</dd>
-                <dd data-con="data_summary_con" dept_name="风湿免疫内科"><span>---</span>风湿免疫内科</dd>
-                <dd data-con="data_summary_con" dept_name="骨科"><span>---</span>骨科</dd>
-                <dd data-con="data_summary_con" dept_name="神经内科"><span>---</span>神经内科</dd>
+                <dd data-con="data_summary_con" dept_name="妇科"><span>---</span>妇产科</dd>
+                <dd data-con="data_summary_con" dept_name="眼科"><span>---</span>眼科</dd>
+                <dd data-con="data_summary_con" dept_name="儿科"><span>---</span>儿科</dd>
+                <dd data-con="data_summary_con" dept_name="普外"><span>---</span>普外科</dd>
+                <dd data-con="data_summary_con" dept_name="耳鼻喉"><span>---</span>耳鼻喉科</dd>
+                <dd data-con="data_summary_con" dept_name="神经内"><span>---</span>神经内科</dd>
+                <dd data-con="data_summary_con" dept_name="心脏内"><span>---</span>心脏内科</dd>
+                <dd data-con="data_summary_con" dept_name="肿瘤"><span>---</span>肿瘤科</dd>
+                <dd data-con="data_summary_con" dept_name="泌尿外科"><span>---</span>泌尿外科</dd>
+                <dd data-con="data_summary_con" dept_name="呼吸内"><span>---</span>呼吸内科</dd>
+                <dd data-con="data_summary_con" dept_name="骨伤科"><span>---</span>骨伤科</dd>
+                <dd data-con="data_summary_con" dept_name="肾脏内科"><span>---</span>肾脏内科</dd>
+                <dd data-con="data_summary_con" dept_name="内分泌"><span>---</span>内分泌科</dd>
+                <dd data-con="data_summary_con" dept_name="神经外科"><span>---</span>神经外科</dd>
+                <dd data-con="data_summary_con" dept_name="心胸外科"><span>---</span>心胸外科</dd>
             </dl>
             <dl class="data-discover">
                 <dt>数据探索</dt>
@@ -108,8 +112,10 @@
             </ul>
             <h2>患者年龄分布</h2>
             <div id="data_summary_con_chart01" style="width:695px;height:490px;padding:10px 30px 25px 15px;"></div>
-            <h2>性别比例</h2>
-            <div id="data_summary_con_chart02" style="display:inline-block; width:185px;height:185px;margin-left:145px;"></div>
+            <div id="data_summary_con_chart02box">
+                <h2>性别比例</h2>
+                <div id="data_summary_con_chart02" style="display:inline-block; width:185px;height:185px;margin-left:145px;"></div>
+            </div>
             <img class="pull-right seximg" src="imgs/img41.png" alt="男女比例" />
             <h2>地域分布</h2>
             <div id="data_summary_con_chart03" style="width:695px;height:500px;"></div>
@@ -122,13 +128,13 @@
                 <li>个人中心</li>
                 <li class="last">数据探索</li>
             </ul>
-            <div class="search-pt hide">
+            <div class="search-pt">
                 <input type="text" placeholder="结节性甲状腺肿块" /><span class="glyphicon glyphicon-search"></span><a class="btn-searchpt">搜索</a><a class="btn-searchgj">高级搜索</a>
             </div>
-            <div class="search-gj">
+            <div class="search-gj hide">
                 <h3>常规特征</h3>
                 <div class="search-box">
-                    <select id="data_discover_gjconf" class="onesel">
+                    <select id="data_discover_gjconf" class="onesel" style="visibility:hidden;">
                         <option value="and">并且</option>
                         <option value="or">或者</option>
                     </select>
@@ -137,7 +143,7 @@
                 <div class="bar-group">
                     <a class="add-btn">+&nbsp;&nbsp;添加类目</a>
                     <a class="search-btn">搜索</a>
-                    <a class="back-pt hide">返回</a>
+                    <a class="back-pt">返回</a>
                 </div>
             </div>
             <div class="searchinfo">
@@ -236,7 +242,7 @@
                         </ul>
                     </a>
                 </div>
-                <div class="rightside pull-right hide">
+                <div class="rightside pull-right">
                     <h3>TOP10</h3>
                     <ul class="tabul clearfix">
                         <li data-con="top_01" class="active">疾病</li>
@@ -288,9 +294,9 @@
                         </li>
                     </ul>
                 </div>
-                <nav>
+                <nav class="hide m-pagenav">
                     <ul class="pagination clearfix">
-                        <li data-pagenum="1" class="disabled first"><a>首页</a></li>
+                        <li pagenum="1" class="disabled first"><a>首页</a></li>
                         <li class="disabled prev"><a>&lt;</a></li>
                         <li class="creatli active"><a>1</a></li>
                         <li class="creatli"><a>2</a></li>
@@ -329,7 +335,7 @@
                         <dd data-tablename="outp_mr" data-colname="past_history">既往史</dd>
                         <dd data-tablename="outp_mr" data-colname="physical_exam">体格检查</dd>
                         <dd data-tablename="outp_mr" data-colname="tcm_four_observations">中医"四诊"观察结果</dd>
-                        <dd data-tablename="outp_diag_info" data-colname="diag_name">诊断名称</dd>
+                        <dd data-tablename="outp_diag_info" data-colname="diag_name">门诊诊断名称</dd>
                         <dd data-tablename="outp_diag_info" data-colname="master_flag">主从诊断</dd>
                         <dd data-tablename="outp_diag_info" data-colname="treat_result">治愈情况</dd>
                         <dd data-tablename="outp_diag_info" data-colname="diag_datetime">诊断时间</dd>
@@ -343,7 +349,7 @@
                         <dd data-tablename="inp_rec_inp_mr_page" data-colname="operation_history">手术史</dd>
                         <dd data-tablename="inp_rec_inp_mr_page" data-colname="blood_transfusion_history">输血史</dd>
                         <dd data-tablename="inp_rec_inp_mr_page" data-colname="physicalexam_desc">体格检查-描述</dd>
-                        <dd data-tablename="inp_mr_diag" data-colname="diag_name">诊断名称</dd>
+                        <dd data-tablename="inp_mr_diag" data-colname="diag_name">住院诊断名称</dd>
                         <dd data-tablename="exam_info" data-colname="chief_complaint">检查主诉</dd>
                         <dd data-tablename="exam_info" data-colname="symptom_desc">症状描述</dd>
                         <dd data-tablename="exam_info" data-colname="exam_method_name">检查方法名称</dd>
