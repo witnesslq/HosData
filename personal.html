@@ -30,36 +30,35 @@
             <h2>个人中心</h2>
             <dl class="my-aplly active my-open">
                 <dt>我的应用</dt>
-                <dd class="active" data-con="my_apply_con_01"><span>---</span>我的应用</dd>
+                <dd class="active" con="my_apply_con_01"><span>---</span>我的应用</dd>
             </dl>
             <dl class="data-summary">
                 <dt>数据概述</dt>
-                <dd data-con="data_summary_con" dept_name="妇科"><span>---</span>妇产科</dd>
-                <dd data-con="data_summary_con" dept_name="眼科"><span>---</span>眼科</dd>
-                <dd data-con="data_summary_con" dept_name="儿科"><span>---</span>儿科</dd>
-                <dd data-con="data_summary_con" dept_name="普外"><span>---</span>普外科</dd>
-                <dd data-con="data_summary_con" dept_name="耳鼻喉"><span>---</span>耳鼻喉科</dd>
-                <dd data-con="data_summary_con" dept_name="神经内"><span>---</span>神经内科</dd>
-                <dd data-con="data_summary_con" dept_name="心脏内"><span>---</span>心脏内科</dd>
-                <dd data-con="data_summary_con" dept_name="肿瘤"><span>---</span>肿瘤科</dd>
-                <dd data-con="data_summary_con" dept_name="泌尿外科"><span>---</span>泌尿外科</dd>
-                <dd data-con="data_summary_con" dept_name="呼吸内"><span>---</span>呼吸内科</dd>
-                <dd data-con="data_summary_con" dept_name="骨伤科"><span>---</span>骨伤科</dd>
-                <dd data-con="data_summary_con" dept_name="肾脏内科"><span>---</span>肾脏内科</dd>
-                <dd data-con="data_summary_con" dept_name="内分泌"><span>---</span>内分泌科</dd>
-                <dd data-con="data_summary_con" dept_name="神经外科"><span>---</span>神经外科</dd>
-                <dd data-con="data_summary_con" dept_name="心胸外科"><span>---</span>心胸外科</dd>
+                <dd con="data_summary_con" dept_name="妇科"><span>---</span>妇产科</dd>
+                <dd con="data_summary_con" dept_name="眼科"><span>---</span>眼科</dd>
+                <dd con="data_summary_con" dept_name="儿科"><span>---</span>儿科</dd>
+                <dd con="data_summary_con" dept_name="普外"><span>---</span>普外科</dd>
+                <dd con="data_summary_con" dept_name="耳鼻喉"><span>---</span>耳鼻喉科</dd>
+                <dd con="data_summary_con" dept_name="神经内"><span>---</span>神经内科</dd>
+                <dd con="data_summary_con" dept_name="心脏内"><span>---</span>心脏内科</dd>
+                <dd con="data_summary_con" dept_name="肿瘤"><span>---</span>肿瘤科</dd>
+                <dd con="data_summary_con" dept_name="泌尿外科"><span>---</span>泌尿外科</dd>
+                <dd con="data_summary_con" dept_name="呼吸内"><span>---</span>呼吸内科</dd>
+                <dd con="data_summary_con" dept_name="骨伤科"><span>---</span>骨伤科</dd>
+                <dd con="data_summary_con" dept_name="肾脏内科"><span>---</span>肾脏内科</dd>
+                <dd con="data_summary_con" dept_name="内分泌"><span>---</span>内分泌科</dd>
+                <dd con="data_summary_con" dept_name="神经外科"><span>---</span>神经外科</dd>
+                <dd con="data_summary_con" dept_name="心胸外科"><span>---</span>心胸外科</dd>
             </dl>
             <dl class="data-discover">
                 <dt>数据探索</dt>
-                <dd data-con="data_discover_con"><span>---</span>数据探索</dd>
+                <dd con="data_discover_con"><span>---</span>数据探索</dd>
             </dl>
             <dl class="user-center">
                 <dt>帐号中心</dt>
                 <dd><span>---</span>帐号信息</dd>
                 <dd><span>---</span>帐号管理</dd>
                 <dd><span>---</span>重置密码</dd>
-                <dd><span>---</span>隐私设置</dd>
             </dl>
             <dl class="sys-notice">
                 <dt>系统通知</dt>
@@ -150,7 +149,7 @@
                 符合条件的病人共<span id="discover_peos" class="nums">0</span>人
             </div>
             <div class="searchres clearfix">
-                <div class="leftside pull-left">
+                <div class="leftsidecon pull-left">
                     <a href="discover/detail.html?patient_id=aaabbbccc" target="_blank">
                         <ul class="list-inline titul">
                             <li>侯xx</li>
@@ -242,12 +241,12 @@
                         </ul>
                     </a>
                 </div>
-                <div class="rightside pull-right">
+                <div class="rightsidecon pull-right hide">
                     <h3>TOP10</h3>
                     <ul class="tabul clearfix">
-                        <li data-con="top_01" class="active">疾病</li>
-                        <li data-con="top_02">用药</li>
-                        <li data-con="top_03">症状</li>
+                        <li con="top_01" class="active">疾病</li>
+                        <li con="top_02">用药</li>
+                        <li con="top_03">症状</li>
                     </ul>
                     <ul class="tabcon">
                         <li id="top_01" class="active">
@@ -318,46 +317,46 @@
                 <input type="text" placeholder="请输入要筛选的关键字" />
                 <div class="search-items">
                     <ul class="list-unstyled">
-                        <li data-tablename="org_patient_info" data-colname="patient_name">患者姓名</li>
-                        <li data-tablename="org_patient_info" data-colname="sex_name">性别</li>
-                        <li data-tablename="org_patient_info" data-colname="birth_date">出生年月</li>
-                        <li data-tablename="org_patient_info" data-colname="age">年龄</li>
-                        <li data-tablename="org_patient_info" data-colname="patient_id">患者标识</li>
-                        <li data-tablename="org_patient_info" data-colname="nation_name">民族名称</li>
+                        <li tablename="org_patient_info" colname="patient_name">患者姓名</li>
+                        <li tablename="org_patient_info" colname="sex_name">性别</li>
+                        <li tablename="org_patient_info" colname="birth_date">出生年月</li>
+                        <li tablename="org_patient_info" colname="age">年龄</li>
+                        <li tablename="org_patient_info" colname="patient_id">患者标识</li>
+                        <li tablename="org_patient_info" colname="nation_name">民族名称</li>
                     </ul>
                     <dl>
                         <dt>门诊信息</dt>
-                        <dd data-tablename="outp_mr" data-colname="org_id">门诊医院</dd>
-                        <dd data-tablename="outp_mr" data-colname="dept_name">门诊科室名称</dd>
-                        <dd data-tablename="outp_mr" data-colname="visit_datetime">就诊日期</dd>
-                        <dd data-tablename="outp_mr" data-colname="chief_complaint">主诉</dd>
-                        <dd data-tablename="outp_mr" data-colname="present_disease_history">现病史</dd>
-                        <dd data-tablename="outp_mr" data-colname="past_history">既往史</dd>
-                        <dd data-tablename="outp_mr" data-colname="physical_exam">体格检查</dd>
-                        <dd data-tablename="outp_mr" data-colname="tcm_four_observations">中医"四诊"观察结果</dd>
-                        <dd data-tablename="outp_diag_info" data-colname="diag_name">门诊诊断名称</dd>
-                        <dd data-tablename="outp_diag_info" data-colname="master_flag">主从诊断</dd>
-                        <dd data-tablename="outp_diag_info" data-colname="treat_result">治愈情况</dd>
-                        <dd data-tablename="outp_diag_info" data-colname="diag_datetime">诊断时间</dd>
+                        <dd tablename="outp_mr" colname="org_id">门诊医院</dd>
+                        <dd tablename="outp_mr" colname="dept_name">门诊科室名称</dd>
+                        <dd tablename="outp_mr" colname="visit_datetime">就诊日期</dd>
+                        <dd tablename="outp_mr" colname="chief_complaint">主诉</dd>
+                        <dd tablename="outp_mr" colname="present_disease_history">现病史</dd>
+                        <dd tablename="outp_mr" colname="past_history">既往史</dd>
+                        <dd tablename="outp_mr" colname="physical_exam">体格检查</dd>
+                        <dd tablename="outp_mr" colname="tcm_four_observations">中医"四诊"观察结果</dd>
+                        <dd tablename="outp_diag_info" colname="diag_name">门诊诊断名称</dd>
+                        <dd tablename="outp_diag_info" colname="master_flag">主从诊断</dd>
+                        <dd tablename="outp_diag_info" colname="treat_result">治愈情况</dd>
+                        <dd tablename="outp_diag_info" colname="diag_datetime">诊断时间</dd>
                     </dl>
                     <dl>
                         <dt>住院信息</dt>
-                        <dd data-tablename="inp_rec_inp_mr_page" data-colname="physician_doctor_sign">主治医师签名</dd>
-                        <dd data-tablename="inp_rec_inp_mr_page" data-colname="dishospital_way_name">离院方式名称</dd>
-                        <dd data-tablename="inp_rec_inp_mr_page" data-colname="western_or_tcm">中西医标识</dd>
-                        <dd data-tablename="inp_rec_inp_mr_page" data-colname="chief_complaint">住院主诉</dd>
-                        <dd data-tablename="inp_rec_inp_mr_page" data-colname="operation_history">手术史</dd>
-                        <dd data-tablename="inp_rec_inp_mr_page" data-colname="blood_transfusion_history">输血史</dd>
-                        <dd data-tablename="inp_rec_inp_mr_page" data-colname="physicalexam_desc">体格检查-描述</dd>
-                        <dd data-tablename="inp_mr_diag" data-colname="diag_name">住院诊断名称</dd>
-                        <dd data-tablename="exam_info" data-colname="chief_complaint">检查主诉</dd>
-                        <dd data-tablename="exam_info" data-colname="symptom_desc">症状描述</dd>
-                        <dd data-tablename="exam_info" data-colname="exam_method_name">检查方法名称</dd>
-                        <dd data-tablename="lab_info" data-colname="speciman_type">标本类别</dd>
-                        <dd data-tablename="lab_info" data-colname="lab_item_name">检验方法名称</dd>
-                        <dd data-tablename="general_operation_record" data-colname="operation_name">手术名称</dd>
-                        <dd data-tablename="inp_rec_inp_mr_page" data-colname="org_id">住院医院</dd>
-                        <dd data-tablename="inp_rec_inp_mr_page" data-colname="dept_name">住院科室名称</dd>
+                        <dd tablename="inp_rec_inp_mr_page" colname="physician_doctor_sign">主治医师签名</dd>
+                        <dd tablename="inp_rec_inp_mr_page" colname="dishospital_way_name">离院方式名称</dd>
+                        <dd tablename="inp_rec_inp_mr_page" colname="western_or_tcm">中西医标识</dd>
+                        <dd tablename="inp_rec_inp_mr_page" colname="chief_complaint">住院主诉</dd>
+                        <dd tablename="inp_rec_inp_mr_page" colname="operation_history">手术史</dd>
+                        <dd tablename="inp_rec_inp_mr_page" colname="blood_transfusion_history">输血史</dd>
+                        <dd tablename="inp_rec_inp_mr_page" colname="physicalexam_desc">体格检查-描述</dd>
+                        <dd tablename="inp_mr_diag" colname="diag_name">住院诊断名称</dd>
+                        <dd tablename="exam_info" colname="chief_complaint">检查主诉</dd>
+                        <dd tablename="exam_info" colname="symptom_desc">症状描述</dd>
+                        <dd tablename="exam_info" colname="exam_method_name">检查方法名称</dd>
+                        <dd tablename="lab_info" colname="speciman_type">标本类别</dd>
+                        <dd tablename="lab_info" colname="lab_item_name">检验方法名称</dd>
+                        <dd tablename="general_operation_record" colname="operation_name">手术名称</dd>
+                        <dd tablename="inp_rec_inp_mr_page" colname="org_id">住院医院</dd>
+                        <dd tablename="inp_rec_inp_mr_page" colname="dept_name">住院科室名称</dd>
                     </dl>
                 </div>
             </div>

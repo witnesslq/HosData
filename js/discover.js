@@ -24,20 +24,20 @@
                     var $li = $('<li>');
                     var $a = $('<a>');
                     $a.text(mz_data[i].visit_datetime + ' ' + '门诊病例' + (i + 1));
-                    $li.append($a).attr({ 'data-health_event_id': mz_data[i].health_event_id, 'data-binglitype': 'mengzhen' });
+                    $li.append($a).attr({ 'health_event_id': mz_data[i].health_event_id, 'binglitype': 'mengzhen' });
                     $ul.append($li);
                 }
                 for (var j = 0, len = zy_data.length; j < len; i++) {
                     var $li = $('<li>');
                     var $a = $('<a>');
                     $a.text(zy_data[j].inp_date + ' ' + '住院病例' + (j + 1));
-                    $li.append($a).attr({ 'data-health_event_id': mz_data[i].health_event_id, 'data-binglitype': 'zhuyuan' });
+                    $li.append($a).attr({ 'health_event_id': mz_data[i].health_event_id, 'binglitype': 'zhuyuan' });
                     $ul.append($li);
                 }
                 var $firstli = $ul.find('li:first');
                 $firstli.addClass('active').find('a').addClass('first');
-                var health_event_id = $firstli.data('health_event_id');
-                var binglitype = $firstli.data('binglitype');
+                var health_event_id = $firstli.attr('health_event_id');
+                var binglitype = $firstli.attr('binglitype');
                 get_discover_detail_data(health_event_id, get_discover_detail_data);
             }
         }
@@ -46,8 +46,8 @@
     $('.discover-box .nav-box').on('click', 'li', function () {
         var $this = $(this);
         $this.addClass('active').siblings().removeClass('active');
-        var health_event_id = $this.data('health_event_id');
-        var binglitype = $this.data('binglitype');
+        var health_event_id = $this.attr('health_event_id');
+        var binglitype = $this.attr('binglitype');
         get_discover_detail_data(health_event_id, binglitype);
     });
     //获取详情右侧具体数据
@@ -96,6 +96,18 @@
                                 case 'advice_item_content':
                                     $box.append('<p><span class="tit">医嘱</span>' + res[item] + '</p>');
                                     break;
+                                case 'job_type_name':
+                                    $box.append('<p><span class="tit">职业</span>' + res[item] + '</p>');
+                                    break;
+                                case 'marriage_state_name':
+                                    $box.append('<p><span class="tit">婚姻状况</span>' + res[item] + '</p>');
+                                    break;
+                                case 'dishospital_way_name':
+                                    $box.append('<p><span class="tit">离院方式</span>' + res[item] + '</p>');
+                                    break;
+                                case 'exam_method_name':
+                                    $box.append('<p><span class="tit">检查方法</span>' + res[item] + '</p>');
+                                    break;
                                 default:
                                     $box.append('<p><span class="tit">其它</span>' + res[item] + '</p>');
                             }
@@ -125,6 +137,9 @@
                                     break;
                                 case 'doctor_sign':
                                     $box.append('<p><span class="tit">医生姓名</span>' + res[item] + '</p>');
+                                    break;
+                                case 'drug_name':
+                                    $box.append('<p><span class="tit">用药名称</span>' + res[item] + '</p>');
                                     break;
                                 default:
                                     $box.append('<p><span class="tit">其它</span>' + res[item] + '</p>');

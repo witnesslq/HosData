@@ -5,7 +5,7 @@
     });
     //个人中心，左侧边栏子菜单点击事件
     $('.leftside').on('click', 'dd', function () {
-        var con_id = $(this).data('con');
+        var con_id = $(this).attr('con');
         $(this).addClass('active').siblings('dd').removeClass('active');
         $(this).parent().addClass('active').siblings('dl').removeClass('active').find('dd').removeClass('active');
         $('.center').removeClass('active');
@@ -686,7 +686,7 @@
     $('.data-discover-con .tabul li').hover(function () {
         var _this = this;
         $(_this).addClass('active').siblings().removeClass('active');
-        var con_id = $(_this).data('con');
+        var con_id = $(_this).attr('con');
         $('.data-discover-con .tabcon>li').removeClass('active');
         $('#' + con_id).addClass('active');
     });
@@ -697,6 +697,12 @@
     //个人中心，数据探索普通搜索，搜索按钮事件
     $('#data_discover_con').on('click', '.btn-searchpt', function () {
         discover_pt_event(1, 10);
+    });
+    //个人中心，数据探索普通搜索，搜索框回车键事件
+    $('#data_discover_con').on('keyup', '.search-pt input', function (event) {
+        if (event.keyCode == '13') {
+            $('#data_discover_con .btn-searchpt').trigger('click');
+        }
     });
     //个人中心，数据探索添加类目
     $('#data_discover_con').on('click', '.search-gj .add-btn', function () {
@@ -740,8 +746,20 @@
             discover_pt_event(current_page, 10);
         }
     });
+    //个人中心，数据探索分页输入框回车键事件
+    $('#data_discover_con').on('keyup', 'nav .inputbox input', function (event) {
+        if (event.keyCode == '13') {
+            $('#data_discover_con nav .inputbox a').trigger('click');
+        }
+    });
     //个人中心，数据探索，高级搜索查询数据事件
+    var discover_gj_loadflag = false;
     function discover_gj_event(current_page, page_size) {
+        if (discover_gj_loadflag) {
+            return false;
+        }
+        discover_gj_loadflag = true;
+        tipsMask_pop('加载中…');
         var switch_val = $('#data_discover_gjconf').val();
         var param = {
             "paramlist": [
@@ -787,8 +805,8 @@
             }
             if ($twosel.length > 0) {
                 if ($twosel.hasClass('noswitch')) {
-                    var tablename = $f_input.data('tablename');
-                    var colname = $f_input.data('colname');
+                    var tablename = $f_input.attr('tablename');
+                    var colname = $f_input.attr('colname');
                     for (var i = 0, len = param.paramlist.length; i < len; i++) {
                         for (var item in param.paramlist[i]) {
                             if (item == tablename) {
@@ -804,8 +822,8 @@
                     if (!t_val) {
                         return true;
                     } else {
-                        var tablename = $f_input.data('tablename');
-                        var colname = $f_input.data('colname');
+                        var tablename = $f_input.attr('tablename');
+                        var colname = $f_input.attr('colname');
                         for (var i = 0, len = param.paramlist.length; i < len; i++) {
                             for (var item in param.paramlist[i]) {
                                 if (item == tablename) {
@@ -824,8 +842,8 @@
                 if (!start_val || !end_val) {
                     return true;
                 }
-                var tablename = $f_input.data('tablename');
-                var colname = $f_input.data('colname');
+                var tablename = $f_input.attr('tablename');
+                var colname = $f_input.attr('colname');
                 for (var i = 0, len = param.paramlist.length; i < len; i++) {
                     for (var item in param.paramlist[i]) {
                         if (item == tablename) {
@@ -849,7 +867,7 @@
             success: function (res) {
                 if (res.header.status == '300') {
                     $('#discover_peos').text(res.header.total);
-                    var res_box = $('#data_discover_con').find('.searchres .leftside').empty();
+                    var res_box = $('#data_discover_con').find('.searchres .leftsidecon').empty();
                     var res_array = res.body;
                     for (var i = 0, len = res_array.length; i < len; i++) {
                         var item = res_array[i];
@@ -877,14 +895,66 @@
                         total_page = 1000;
                     }
                     generatePagination($('#data_discover_con nav'), total_page, res.header.pagesize, res.header.currentpage);
+                    tipsMask_del();
+                    discover_gj_loadflag = false;
                 }
             }
         });
     }
     //个人中心，数据探索，普通搜索查询数据事件
+    var discover_pt_loadflag = false;
     function discover_pt_event(current_page, page_size) {
         var _val = $.trim($('#data_discover_con .btn-searchpt').siblings('input').val());
         if (_val) {
+            if (discover_pt_loadflag) {
+                return false;
+            }
+            discover_pt_loadflag = true;
+            tipsMask_pop('加载中…');
+            var load_count = 0;
+            //ajax提交获取TOP查询结果
+            $.ajax({
+                type: 'POST',
+                cache: false,
+                data: {
+                    'param': JSON.stringify({ 'searchtxt': _val })
+                },
+                url: '/men/getDrugDiseaseList',
+                dataType: 'json',
+                success: function (res) {
+                    if (res.header.status == '300') {
+                        var result = res.body;
+                        var $top_box = $('#data_discover_con .rightsidecon');
+                        var $jbul = $('#top_01').find('ul').empty();
+                        var $yyul = $('#top_02').find('ul').empty();
+                        for (var topkey in result) {
+                            if (topkey == 'disease') {
+                                if (result[topkey].length <= 0) {
+                                    $jbul.append('<li class="nodata">暂无数据</li>');
+                                } else {
+                                    for (var jbi = 0, jblen = result[topkey].length; jbi < jblen; jbi++) {
+                                        $jbul.append('<li><a title=' + result[topkey][jbi]["diag_name"] + '>' + (jbi + 1) + '、' + result[topkey][jbi]["diag_name"] + '</a></li>');
+                                    }
+                                }
+                            } else if (topkey = 'durgs') {
+                                if (result[topkey].length <= 0) {
+                                    $yyul.append('<li class="nodata">暂无数据</li>');
+                                } else {
+                                    for (var yyi = 0, yylen = result[topkey].length; yyi < yylen; yyi++) {
+                                        $yyul.append('<li><a title=' + result[topkey][yyi]["drug_name"] + '>' + (yyi + 1) + '、' + result[topkey][yyi]["drug_name"] + '</a></li>');
+                                    }
+                                }
+                            }
+                        }
+                        $top_box.removeClass('hide');
+                        load_count++;
+                        if (load_count == 2) {
+                            tipsMask_del();
+                            discover_pt_loadflag = false;
+                        }
+                    }
+                }
+            });
             var paramstr = JSON.stringify({
                 "currentpage": current_page, "pagesize": page_size, "searchtxt": _val
             });
@@ -900,11 +970,12 @@
                 success: function (res) {
                     if (res.header.status == '300') {
                         $('#discover_peos').text(res.header.total);
-                        var res_box = $('#data_discover_con').find('.searchres .leftside').empty();
+                        var res_box = $('#data_discover_con').find('.searchres .leftsidecon').empty();
                         var res_array = res.body;
                         for (var i = 0, len = res_array.length; i < len; i++) {
                             var item = res_array[i];
                             var org_name = '湘雅附一';
+                            var dataflag = false;
                             if (item.org_id == '000001') {
                                 org_name = '湘雅附一';
                             } else if (item.org_id == '000002') {
@@ -923,29 +994,77 @@
                             <li>该患者共<span>' + item.case + '</span>份病历</li>\
                         </ul>');
                             $a.append($ul);
-                            if (item.menzhen) {
-                                var menzhenobj = item.menzhen;
+                            if (item.menzhen && item.menzhen.length > 0) {
+                                dataflag = true;
+                                var menzhenobj = item.menzhen[0];
                                 var $p = $('<p class="conp" >门诊时间：<span class="vtime"></span></p>');
-                                for (var item in menzhenobj) {
-                                    if (item == 'visit_datetime') {
-                                        $p.find('.vtime').text(menzhenobj[item]);
+                                for (var key in menzhenobj) {
+                                    if (key == 'health_event_id') {
+                                        continue;
+                                    } else if (key == 'visit_datetime') {
+                                        $p.find('.vtime').text(menzhenobj[key]);
                                     } else {
-                                        $p.append(item + '&nbsp;&nbsp;' + menzhenobj[item]);
+                                        $p.append(key + '：' + menzhenobj[key] + '&nbsp;&nbsp;');
                                     }
                                 }
                                 $a.append($p);
                             }
-                            if (item.zhuyuan) {
-                                var zhuyuanobj = item.zhuyuan;
+                            if (item.zhuyuan && item.zhuyuan.length > 0) {
+                                dataflag = true;
+                                var zhuyuanobj = item.zhuyuan[0];
                                 var $p = $('<p class="conp" >住院时间：<span class="vtime"></span></p>');
-                                for (var item in zhuyuanobj) {
-                                    if (item == 'inp_date') {
-                                        $p.find('.vtime').text(zhuyuanobj[item]);
+                                for (var key in zhuyuanobj) {
+                                    if (key == 'health_event_id') {
+                                        continue;
+                                    } else if (key == 'inp_date') {
+                                        $p.find('.vtime').text(zhuyuanobj[key]);
                                     } else {
-                                        $p.append(item + '&nbsp;&nbsp;' + zhuyuanobj[item]);
+                                        $p.append(key + '：' + zhuyuanobj[key] + '&nbsp;&nbsp;');
                                     }
                                 }
                                 $a.append($p);
+                            }
+                            if (dataflag) {
+                                var $span = $('<span class="glyphicon glyphicon-menu-down"></span>');
+                                var $itemdatasbox = $('<div class="itemdatabox" ></div>');
+                                if (item.menzhen && item.menzhen.length > 0) {
+                                    var $dl = $('<dl><dt>门诊记录</dt></dl>');
+                                    for (var j = 0, lenj = item.menzhen.length; j < lenj; j++) {
+                                        var $dd = $('<dd>门诊时间：<span class="vtime"></span></dd>');
+                                        var itemobj = item.menzhen[j];
+                                        for (var key in itemobj) {
+                                            if (key == 'health_event_id') {
+                                                continue;
+                                            } else if (key == 'visit_datetime') {
+                                                $dd.find('.vtime').text(itemobj[key]);
+                                            } else {
+                                                $dd.append(key + '：' + itemobj[key] + '&nbsp;&nbsp;');
+                                            }
+                                        }
+                                        $dl.append($dd);
+                                    }
+                                    $itemdatasbox.append($dl);
+                                }
+                                if (item.zhuyuan && item.zhuyuan.length > 0) {
+                                    var $dl = $('<dl><dt>住院记录</dt></dl>');
+                                    for (var k = 0, lenk = item.zhuyuan.length; k < lenk; k++) {
+                                        var $dd = $('<dd>住院时间：<span class="vtime"></span></dd>');
+                                        var itemobj = item.zhuyuan[k];
+                                        for (var key in itemobj) {
+                                            if (key == 'health_event_id') {
+                                                continue;
+                                            } else if (key == 'inp_date') {
+                                                $dd.find('.vtime').text(itemobj[key]);
+                                            } else {
+                                                $dd.append(key + '：' + itemobj[key] + '&nbsp;&nbsp;');
+                                            }
+                                        }
+                                        $dl.append($dd);
+                                    }
+                                    $itemdatasbox.append($dl);
+                                }
+                                $span.append($itemdatasbox);
+                                $a.append($span);
                             }
                             res_box.append($a);
                         }
@@ -954,6 +1073,11 @@
                             total_page = 1000;
                         }
                         generatePagination($('#data_discover_con nav'), total_page, res.header.pagesize, res.header.currentpage);
+                        load_count++;
+                        if (load_count == 2) {
+                            tipsMask_del();
+                            discover_pt_loadflag = false;
+                        }
                     }
                 }
             });
@@ -979,7 +1103,9 @@
         $search_item.css({ 'top': top, 'left': left }).data('target', this);
         var _val = $.trim($this.val());
         if (_val) {
-            bd_ajax_handle(_val);
+            var table_name = $this.siblings('.oneinput').attr('tablename');
+            var colume_name = $this.siblings('.oneinput').attr('colname');
+            bd_ajax_handle(table_name, colume_name,_val);
         } else {
             $search_item.addClass('hide');
         }
@@ -989,18 +1115,37 @@
         var $search_item = $('#data_discover_con .bd-search-box');
         bd_search_timer = setTimeout(function () {
             $search_item.addClass('hide');
-        }, 100);
+        }, 120);
     });
     //个人中心，数据探索，全部条件组中第二个输入框键盘输入模糊匹配事件
-    $('#data_discover_con').on('keyup', '.search-gj .search-box .twoinput', function () {
+    $('#data_discover_con').on('keyup', '.search-gj .search-box .twoinput', function (event) {
         var $this = $(this);
         var val = $.trim($this.val());
+        var $ul=$('#data_discover_con .bd-search-box');
         if (!val) {
-            $('#data_discover_con .bd-search-box').addClass('hide');
+            $ul.addClass('hide');
             return false;
         }
-        var table_name = $this.siblings('.oneinput').data('tablename');
-        var colume_name = $this.siblings('.oneinput').data('colname');
+        if (event.keyCode == '38') {
+            alert('向上');
+            return false;
+        } else if (event.keyCode == '40') {
+            var activeindex = $ul.find('.active').index();
+            var lisize = $ul.find('li').length;
+            if (activeindex >= 0) {
+                activeindex++;
+                activeindex = activeindex % lisize;
+            }
+            $ul.find('li').removeClass('active');
+            $ul.find('li').eq(activeindex).addClass('active');
+            return false;
+        } else if (event.keyCode == '13') {
+            $this.val($ul.find('.active').text());
+            $this.blur();
+            return false;
+        }
+        var table_name = $this.siblings('.oneinput').attr('tablename');
+        var colume_name = $this.siblings('.oneinput').attr('colname');
         bd_ajax_handle(table_name, colume_name, val);
     });
     function bd_ajax_handle(table_name, colume_name, _val) {
@@ -1057,8 +1202,8 @@
         var $search_item = $('#data_discover_con .search-item-box');
         var $target = $($search_item.data('target'));
         var _val = $this.text();
-        var tablename = $(this).data('tablename');
-        var colname = $(this).data('colname');
+        var tablename = $(this).attr('tablename');
+        var colname = $(this).attr('colname');
         var $parent = $target.parent();
         var has_sameitem = false;
         $parent.siblings('.search-box').find('.oneinput').each(function (index, item) {
@@ -1073,7 +1218,7 @@
             return;
         }
         $target.val(_val).attr({
-            'data-tablename': tablename, 'data-colname': colname
+            'tablename': tablename, 'colname': colname
         });
         $parent.find('.twosel').remove();
         $parent.find('.twoinput').remove();
@@ -1082,15 +1227,20 @@
         if (_val == '年龄') {
             $target.after('<div class="agebox"><input class="agestart m_starttime" type="text" /> 至 <input class="ageend m_endtime" type="text" /></div>');
         } else if (_val == '性别') {
-            $target.after('<select class="twosel noswitch"><option value="全部">全部</option><option value="男">男</option><option value="女">女</option></select>');
+            $target.after('<select class="twosel noswitch"><option value="男">男</option><option value="女">女</option></select>');
         } else if (_val == '医院' || _val == '门诊医院' || _val == '住院医院') {
             $target.after('<select class="twosel noswitch"><option value="全部">全部</option><option value="000001">湘雅附一</option><option value="000002">湘雅附二</option><option value="000003">湘雅附三</option></select>');
         } else if (_val == '科室名称' || _val == '住院科室') {
             $target.after('<select class="twosel noswitch"><option value="全部">全部</option><option value="心血管内科">心血管内科</option><option value="神经内科">神经内科</option><option value="内分秘科">内分秘科</option><option value="肾内科">肾内科</option><option value="呼吸内科">呼吸内科</option>\
 <option value="呼吸内科">呼吸内科</option><option value="消化内科">消化内科</option><option value="血液内科">血液内科</option><option value="神经内科">神经内科</option><option value="风湿免疫内科">风湿免疫内科</option><option value="骨科">骨科</option><option value="神经内科">神经内科</option></select>');
         } else if (_val == '民族名称') {
-            $target.after('<select class="twosel noswitch"><option value="全部">全部</option><option value="汉族">汉族</option><option value="壮族">壮族</option><option value="满族">满族</option><option value="回族">回族</option><option value="苗族">苗族</option><option value="维吾尔族">维吾尔族</option><option value="土家族">土家族</option>\
-                <option value="土家族">土家族</option><option value="蒙古族">蒙古族</option></select>');
+            $target.after('<select class="twosel noswitch"><option value="汉族">汉族</option><option value="壮族">壮族</option><option value="满族">满族</option><option value="回族">回族</option><option value="苗族">苗族</option><option value="维吾尔族">维吾尔族</option><option value="土家族">土家族</option>\
+                <option value="蒙古族">蒙古族</option><option value="藏族">藏族</option><option value="彝族">彝族</option><option value="布依族">布依族</option><option value="侗族">侗族</option><option value="瑶族">瑶族</option><option value="朝鲜族">朝鲜族</option><option value="白族">白族</option><option value="哈尼族">哈尼族</option>\
+                <option value="哈萨克族">哈萨克族</option><option value="黎族">黎族</option><option value="傣族">傣族</option><option value="畲族">畲族</option><option value="傈僳族">傈僳族</option><option value="仡佬族">仡佬族</option><option value="东乡族">东乡族</option><option value="高山">高山族</option><option value="拉祜族">拉祜族</option>\
+                <option value="水族">水族</option><option value="佤族">佤族</option><option value="纳西族">纳西族</option><option value="羌族">羌族</option><option value="土族">土族</option><option value="仡佬族">仡佬族</option><option value="锡伯族">锡伯族</option><option value="柯尔克孜族">柯尔克孜族</option><option value="达斡尔族">达斡尔族</option>\
+                <option value="景颇族">景颇族</option><option value="毛南族">毛南族</option><option value="撒拉族">撒拉族</option><option value="塔吉克族">塔吉克族</option><option value="阿昌族">阿昌族</option><option value="普米族">普米族族</option><option value="鄂温克族">鄂温克族</option><option value="怒族">怒族族</option><option value="京族">京族</option>\
+                <option value="基诺族">基诺族</option><option value="德昂族">德昂族</option><option value="保安族">保安族</option><option value="俄罗斯族">俄罗斯族</option><option value="裕固族">裕固族</option><option value="乌孜别克族">乌孜别克族</option><option value="门巴族">门巴族</option><option value="鄂伦春族">鄂伦春族</option>\
+                <option value="独龙族">独龙族</option><option value="塔塔尔族">塔塔尔族</option><option value="赫赫族">赫赫族</option><option value="珞巴族">珞巴族</option><option value="布朗族">布朗族</option></select>');
         }
         else if (_val == '出生年月' || _val == '就诊日期' || _val == '诊断时间') {
             $target.after('<div class="datebox"><input class="datestart m_starttime" readonly type="text" /> 至 <input class="dateend m_endtime" readonly type="text" /></div>');
@@ -1116,7 +1266,7 @@
                         return false;
                     }
                 }
-            });;
+            });
         } else {
             $target.after('<select class="twosel"><option value="1">包含</option><option value="2">不包含</option></select>\
             <input class="twoinput" type="text" />');

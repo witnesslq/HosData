@@ -3,7 +3,7 @@
     //我们的产品鼠标移入移出交互效果
     $('.product .right-side li').hover(function () {
         var $this = $(this);
-        var con_id = $this.data('con');
+        var con_id = $this.attr('con');
         $this.addClass('active').siblings().removeClass('active');
         $('.product .left-side .con').addClass('hide').siblings('.' + con_id).removeClass('hide');
     });
@@ -132,6 +132,6 @@
     $('.coop-body .menulist li').hover(function () {
         $(this).addClass('active').siblings().removeClass('active');
         $('.coop-body .con').removeClass('active');
-        $('.coop-body .' + $(this).data('con')).addClass('active');
+        $('.coop-body .' + $(this).attr('con')).addClass('active');
     });
 });

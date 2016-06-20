@@ -70,3 +70,12 @@ function addliPagination($dom, index, current_page) {
     $li.append($a);
     $dom.before($li);
 }
+//提示遮罩弹出层弹出
+function tipsMask_pop(message) {
+    var $mask = $('<div class="tipsmask"><div class="mask"></div><div class="text">' + message + '</div></div>');
+    $('body').append($mask);
+}
+//提示遮罩弹出层删除
+function tipsMask_del() {
+    $('.tipsmask').remove();
+}
