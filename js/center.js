@@ -707,15 +707,18 @@
     //个人中心，数据探索添加类目
     $('#data_discover_con').on('click', '.search-gj .add-btn', function () {
         $('#data_discover_con .search-gj .bar-group').before(add_data_dis_html);
+        hide_search_item_box();
     });
     //个人中心，数据探索类目删除
     $('#data_discover_con').on('click', '.search-gj .del', function () {
         $(this).parent().remove();
+        hide_search_item_box();
     });
     //个人中心，数据探索，高级搜索返回
     $('#data_discover_con').on('click', '.search-gj .back-pt', function () {
         $('#data_discover_con .search-pt').removeClass('hide');
         $('#data_discover_con .search-gj').addClass('hide');
+        hide_search_item_box();
     });
     //个人中心，数据探索，高级搜索里探索按钮
     $('#data_discover_con').on('click', '.search-gj .search-btn', function () {
@@ -1187,7 +1190,7 @@
     });
     //个人中心，数据探索，条件弹出选择层关闭按钮事件
     $('#data_discover_con').on('click', '.search-item-box .my-close', function () {
-        $('#data_discover_con .search-item-box').addClass('hide');
+        hide_search_item_box();
     });
     //个人中心，数据探索，条件弹出选择层选择后事件
     $('#data_discover_con').on('click', '.search-item-box li', function () {
@@ -1214,7 +1217,7 @@
         });
         if (has_sameitem) {
             alert('不要选择重复的选项,请重新选择！');
-            $('#data_discover_con .search-item-box').addClass('hide');
+            hide_search_item_box();
             return;
         }
         $target.val(_val).attr({
@@ -1271,7 +1274,7 @@
             $target.after('<select class="twosel"><option value="1">包含</option><option value="2">不包含</option></select>\
             <input class="twoinput" type="text" />');
         }
-        $('#data_discover_con .search-item-box').addClass('hide');
+        hide_search_item_box();
     }
     //个人中心，数据探索，模拟百度条件弹出层选择后事件
     $('#data_discover_con').on('click', '.bd-search-box li', function () {
@@ -1294,4 +1297,8 @@
             $('#data_discover_con .search-item-box dd').removeClass('hide');
         }
     });
+    //个人中心，数据探索，条件弹出选择层关闭
+    function hide_search_item_box() {
+        $('#data_discover_con .search-item-box').addClass('hide');
+    };
 });

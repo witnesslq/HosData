@@ -12,42 +12,33 @@
             if (res.header.status == '300') {
                 var res = res.body[0];
                 var $left_menu = $('#discover_detail_leftmenu');//左侧菜单对象
-                var $ul = $left_menu.find('ul');
                 $left_menu.find('.name').text(res.patient_name);//患者姓名
                 $left_menu.find('.sex').text(res.sex_name);//性别
                 $left_menu.find('.age').text(res.age);//年龄
                 $left_menu.find('.birthday').text(res.birth_date);//出生年月
                 $left_menu.find('.addr').text(res.current_address);//地址
+                var $sel = $('#discover_detail_right').find('select.form-control');
                 var mz_data = res.mengzhen;//门诊病例数据
                 var zy_data = res.zhuyuan;//住院病例数据
                 for (var i = 0, len = mz_data.length; i < len; i++) {
-                    var $li = $('<li>');
-                    var $a = $('<a>');
-                    $a.text(mz_data[i].visit_datetime + ' ' + '门诊病例' + (i + 1));
-                    $li.append($a).attr({ 'health_event_id': mz_data[i].health_event_id, 'binglitype': 'mengzhen' });
-                    $ul.append($li);
+                    var $option = $('<option health_event_id=' + mz_data[i].health_event_id + ' binglitype="mengzhen" >' + mz_data[i].visit_datetime + ' ' + '门诊病例' + (i + 1) + '</option>');
+                    $sel.append($option);
                 }
-                for (var j = 0, len = zy_data.length; j < len; i++) {
-                    var $li = $('<li>');
-                    var $a = $('<a>');
-                    $a.text(zy_data[j].inp_date + ' ' + '住院病例' + (j + 1));
-                    $li.append($a).attr({ 'health_event_id': mz_data[i].health_event_id, 'binglitype': 'zhuyuan' });
-                    $ul.append($li);
+                for (var j = 0, len = zy_data.length; j < len; j++) {
+                    var $option = $('<option health_event_id=' + zy_data[j].health_event_id + ' binglitype="zhuyuan" >' + zy_data[j].inp_date + ' ' + '住院病例' + (j + 1) + '</option>');
+                    $sel.append($option);
                 }
-                var $firstli = $ul.find('li:first');
-                $firstli.addClass('active').find('a').addClass('first');
-                var health_event_id = $firstli.attr('health_event_id');
-                var binglitype = $firstli.attr('binglitype');
-                get_discover_detail_data(health_event_id, get_discover_detail_data);
+                var health_event_id = $sel.find('option:first').attr('health_event_id');
+                var binglitype = $sel.find('option:first').attr('binglitype');
+                get_discover_detail_data(health_event_id, binglitype);
             }
         }
     });
-    //左侧菜单点击切换右侧数据
-    $('.discover-box .nav-box').on('click', 'li', function () {
-        var $this = $(this);
-        $this.addClass('active').siblings().removeClass('active');
-        var health_event_id = $this.attr('health_event_id');
-        var binglitype = $this.attr('binglitype');
+    //切换病例
+    $('#discover_detail_right select.form-control').on('change', function () {
+        var $seloption = $(this).find('option:selected');
+        var health_event_id = $seloption.attr('health_event_id');
+        var binglitype = $seloption.attr('binglitype');
         get_discover_detail_data(health_event_id, binglitype);
     });
     //获取详情右侧具体数据

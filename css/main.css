@@ -395,12 +395,8 @@ footer .con-down .sign{position:absolute;top:29px;left:645px;}
 .peo-body .discover-box{width:1200px;margin: 15px auto 15px auto;border:1px solid #eee; box-shadow:-5px 5px 8px #ddd;}
 .peo-body .discover-box .nav-box{padding-top:80px; width:300px;border-top:1px solid #ddd; text-align:center;font-size:12px;}
 .peo-body .discover-box .nav-box>img{margin-bottom:20px;}
-.peo-body .discover-box .nav-box ul{margin-top:20px;margin-bottom:0;}
-.peo-body .discover-box .nav-box li{position:relative; padding:0 30px;}
-.peo-body .discover-box .nav-box li.active:after{content:''; position:absolute;top:11px;right:0;width:14px;height:16px;background:url(../imgs/icons02.png) no-repeat 0 -460px;}
-.peo-body .discover-box .nav-box li a{display:block; padding:10px 0;border-bottom:1px solid #ddd;color:#84bbf7;}
-.peo-body .discover-box .nav-box li a.first{border-top:1px solid #ddd;}
 .peo-body .discover-box .con-box{width:898px;background-color:#fff;padding:40px;border-left:1px solid #eee;font-size:14px;color:#404040;}
+.peo-body .discover-box .con-box select{width:auto;height:28px;padding:0 5px;}
 .peo-body .discover-box .con-box  p{margin-bottom:6px;}
 .peo-body .discover-box .con-box  h2{font-size:24px;text-align:center;margin-top:0;padding-bottom:20px;border-bottom:1px solid #eee;margin-bottom:20px;}
 .peo-body .discover-box .con-box  .tit{color:#000;font-weight:bold;}
