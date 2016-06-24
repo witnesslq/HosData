@@ -978,7 +978,6 @@
                         for (var i = 0, len = res_array.length; i < len; i++) {
                             var item = res_array[i];
                             var org_name = '湘雅附一';
-                            var dataflag = false;
                             if (item.org_id == '000001') {
                                 org_name = '湘雅附一';
                             } else if (item.org_id == '000002') {
@@ -997,75 +996,9 @@
                             <li>该患者共<span>' + item.case + '</span>份病历</li>\
                         </ul>');
                             $a.append($ul);
-                            if (item.menzhen && item.menzhen.length > 0) {
-                                dataflag = true;
-                                var menzhenobj = item.menzhen[0];
-                                var $p = $('<p class="conp" >门诊时间：<span class="vtime"></span></p>');
-                                for (var key in menzhenobj) {
-                                    if (key == 'health_event_id') {
-                                        continue;
-                                    } else if (key == 'visit_datetime') {
-                                        $p.find('.vtime').text(menzhenobj[key]);
-                                    } else {
-                                        $p.append(key + '：' + menzhenobj[key] + '&nbsp;&nbsp;');
-                                    }
-                                }
-                                $a.append($p);
-                            }
-                            if (item.zhuyuan && item.zhuyuan.length > 0) {
-                                dataflag = true;
-                                var zhuyuanobj = item.zhuyuan[0];
-                                var $p = $('<p class="conp" >住院时间：<span class="vtime"></span></p>');
-                                for (var key in zhuyuanobj) {
-                                    if (key == 'health_event_id') {
-                                        continue;
-                                    } else if (key == 'inp_date') {
-                                        $p.find('.vtime').text(zhuyuanobj[key]);
-                                    } else {
-                                        $p.append(key + '：' + zhuyuanobj[key] + '&nbsp;&nbsp;');
-                                    }
-                                }
-                                $a.append($p);
-                            }
-                            if (dataflag) {
-                                var $span = $('<span class="glyphicon glyphicon-menu-down"></span>');
-                                var $itemdatasbox = $('<div class="itemdatabox" ></div>');
-                                if (item.menzhen && item.menzhen.length > 0) {
-                                    var $dl = $('<dl><dt>门诊记录</dt></dl>');
-                                    for (var j = 0, lenj = item.menzhen.length; j < lenj; j++) {
-                                        var $dd = $('<dd>门诊时间：<span class="vtime"></span></dd>');
-                                        var itemobj = item.menzhen[j];
-                                        for (var key in itemobj) {
-                                            if (key == 'health_event_id') {
-                                                continue;
-                                            } else if (key == 'visit_datetime') {
-                                                $dd.find('.vtime').text(itemobj[key]);
-                                            } else {
-                                                $dd.append(key + '：' + itemobj[key] + '&nbsp;&nbsp;');
-                                            }
-                                        }
-                                        $dl.append($dd);
-                                    }
-                                    $itemdatasbox.append($dl);
-                                }
-                                if (item.zhuyuan && item.zhuyuan.length > 0) {
-                                    var $dl = $('<dl><dt>住院记录</dt></dl>');
-                                    for (var k = 0, lenk = item.zhuyuan.length; k < lenk; k++) {
-                                        var $dd = $('<dd>住院时间：<span class="vtime"></span></dd>');
-                                        var itemobj = item.zhuyuan[k];
-                                        for (var key in itemobj) {
-                                            if (key == 'health_event_id') {
-                                                continue;
-                                            } else if (key == 'inp_date') {
-                                                $dd.find('.vtime').text(itemobj[key]);
-                                            } else {
-                                                $dd.append(key + '：' + itemobj[key] + '&nbsp;&nbsp;');
-                                            }
-                                        }
-                                        $dl.append($dd);
-                                    }
-                                    $itemdatasbox.append($dl);
-                                }
+                            if (parseInt(item.case) > 0) {
+                                var $span = $('<span class="glyphicon glyphicon-menu-down" patient_id=' + item.patient_id + ' searchtxt=' + _val + ' childdata="no" ></span>');
+                                var $itemdatasbox = $('<div class="itemdatabox hide" ></div>');
                                 $span.append($itemdatasbox);
                                 $a.append($span);
                             }
@@ -1086,6 +1019,72 @@
             });
         }
     }
+    //个人中心，数据探索，普通搜索结果鼠标移入显示命中事件
+    $('#data_discover_con').on('mouseover', '.leftsidecon .glyphicon-menu-down', function () {
+        var $this = $(this);
+        var childdata = $this.attr('childdata');
+        var $itemdatasbox = $this.find('.itemdatabox');
+        if (childdata != 'no') {
+            $itemdatasbox.removeClass('hide');
+            return false;
+        }
+        var paramobj = JSON.stringify({ 'patient_id': $this.attr('patient_id'), 'searchtxt': $this.attr('searchtxt') });
+        $.ajax({
+            type: 'POST',
+            cache: false,
+            data: {
+                'param': paramobj
+            },
+            url: '/men/getPatientCaseList',
+            dataType: 'json',
+            success: function (res) {
+                if (res.header.status == '300') {
+                    var item = res.body;
+                    if (item.menzhen && item.menzhen.length > 0) {
+                        var $dl = $('<dl><dt>门诊记录</dt></dl>');
+                        for (var j = 0, lenj = item.menzhen.length; j < lenj; j++) {
+                            var $dd = $('<dd>门诊时间：<span class="vtime"></span></dd>');
+                            var itemobj = item.menzhen[j];
+                            for (var key in itemobj) {
+                                if (key == 'health_event_id') {
+                                    continue;
+                                } else if (key == 'visit_datetime') {
+                                    $dd.find('.vtime').text(itemobj[key]);
+                                } else {
+                                    $dd.append(key + '：' + itemobj[key] + '&nbsp;&nbsp;');
+                                }
+                            }
+                            $dl.append($dd);
+                        }
+                        $itemdatasbox.append($dl);
+                    }
+                    if (item.zhuyuan && item.zhuyuan.length > 0) {
+                        var $dl = $('<dl><dt>住院记录</dt></dl>');
+                        for (var k = 0, lenk = item.zhuyuan.length; k < lenk; k++) {
+                            var $dd = $('<dd>住院时间：<span class="vtime"></span></dd>');
+                            var itemobj = item.zhuyuan[k];
+                            for (var key in itemobj) {
+                                if (key == 'health_event_id') {
+                                    continue;
+                                } else if (key == 'inp_date') {
+                                    $dd.find('.vtime').text(itemobj[key]);
+                                } else {
+                                    $dd.append(key + '：' + itemobj[key] + '&nbsp;&nbsp;');
+                                }
+                            }
+                            $dl.append($dd);
+                        }
+                        $itemdatasbox.append($dl);
+                    }
+                    $itemdatasbox.removeClass('hide');
+                    $this.attr('childdata', 'yes');
+                }
+            }
+        });
+    });
+    $('#data_discover_con').on('mouseout', '.leftsidecon .glyphicon-menu-down', function () {
+        $(this).find('.itemdatabox').addClass('hide');
+    });
     //个人中心，数据探索，普通搜索里高级按钮事件
     $('#data_discover_con').on('click', '.search-pt .btn-searchgj', function () {
         $('#data_discover_con .search-gj').removeClass('hide');
@@ -1108,7 +1107,7 @@
         if (_val) {
             var table_name = $this.siblings('.oneinput').attr('tablename');
             var colume_name = $this.siblings('.oneinput').attr('colname');
-            bd_ajax_handle(table_name, colume_name,_val);
+            bd_ajax_handle(table_name, colume_name, _val);
         } else {
             $search_item.addClass('hide');
         }
@@ -1124,7 +1123,7 @@
     $('#data_discover_con').on('keyup', '.search-gj .search-box .twoinput', function (event) {
         var $this = $(this);
         var val = $.trim($this.val());
-        var $ul=$('#data_discover_con .bd-search-box');
+        var $ul = $('#data_discover_con .bd-search-box');
         if (!val) {
             $ul.addClass('hide');
             return false;
