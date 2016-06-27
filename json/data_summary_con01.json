@@ -4,15 +4,15 @@
     "status": "300"
   },
   "body": {
-    "patients": 5,
-    "mrecords": 6,
-    "operations": 4,
-    "outpatient": 5,
-    "checks": 6,
-    "tests": 7,
-    "inhospital_per": "3%",
-    "inhospitals": 7,
-    "prescrib": 8,
-    "deads": 9
+    "patients": 195435,
+    "mrecords": 309483,
+    "operations": 8754,
+    "outpatient": 195842,
+    "checks": 209832,
+    "tests": 9806,
+    "inhospital_per": "12%",
+    "inhospitals": 4632,
+    "prescrib": 3984,
+    "deads": 23
   }
 }

@@ -1,0 +1,36 @@
+﻿{
+  "header": {
+    "message": "success!",
+    "status": "300"
+  },
+  "body": [
+    {
+      "value": 36,
+      "name": "心脏病"
+    },
+    {
+      "value": 3,
+      "name": "口腔病"
+    },
+    {
+      "value": 9,
+      "name": "重感冒"
+    },
+    {
+      "value": 14,
+      "name": "风湿病"
+    },
+    {
+      "value": 6,
+      "name": "骨质疏松"
+    },
+    {
+      "value": 17,
+      "name": "败血症"
+    },
+    {
+      "value": 15,
+      "name": "过敏性皮炎"
+    }
+  ]
+}

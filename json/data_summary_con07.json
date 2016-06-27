@@ -1,0 +1,32 @@
+﻿{
+  "header": {
+    "message": "success!",
+    "status": "300"
+  },
+  "body": [
+    {
+      "value": 30,
+      "name": "血常规"
+    },
+    {
+      "value": 32,
+      "name": "凝血功能"
+    },
+    {
+      "value": 12,
+      "name": "肺功能"
+    },
+    {
+      "value": 4,
+      "name": "淋巴细胞"
+    },
+    {
+      "value": 8,
+      "name": "血小板"
+    },
+    {
+      "value": 14,
+      "name": "酸碱度"
+    }
+  ]
+}

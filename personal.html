@@ -97,6 +97,17 @@
                 <li>个人中心</li>
                 <li class="last">数据概述</li>
             </ul>
+            <div class="selhospital clearfix">
+                <div class="pull-right">
+                    请选择医院：
+                    <select class="form-contro">
+                        <option value="all">全部</option>
+                        <option value="000001">湘雅附一</option>
+                        <option>湘雅附二</option>
+                        <option>湘雅附三</option>
+                    </select>
+                </div>
+            </div>
             <ul class="clearfix numsul">
                 <li>患者数量：<span class="patients">5，230</span></li>
                 <li>病例数量：<span class="mrecords">23，650</span></li>
@@ -109,13 +120,17 @@
                 <li>医嘱数量：<span class="prescrib">34，212</span></li>
                 <li>死亡数量：<span class="deads">320</span></li>
             </ul>
+            <h2>疾病、用药、检查TOP</h2>
+            <div id="data_summary_con_chart04" style="width:228px;height:220px;display:inline-block;margin-bottom:20px;"></div>
+            <div id="data_summary_con_chart05" style="width:228px;height:220px;display:inline-block;margin-bottom:20px;"></div>
+            <div id="data_summary_con_chart06" style="width:228px;height:220px;display:inline-block;margin-bottom:20px;"></div>
             <h2>患者年龄分布</h2>
             <div id="data_summary_con_chart01" style="width:695px;height:490px;padding:10px 30px 25px 15px;"></div>
             <div id="data_summary_con_chart02box">
                 <h2>性别比例</h2>
                 <div id="data_summary_con_chart02" style="display:inline-block; width:185px;height:185px;margin-left:145px;"></div>
+                <img class="pull-right seximg" src="imgs/img41.png" alt="男女比例" />
             </div>
-            <img class="pull-right seximg" src="imgs/img41.png" alt="男女比例" />
             <h2>地域分布</h2>
             <div id="data_summary_con_chart03" style="width:695px;height:500px;"></div>
         </div>

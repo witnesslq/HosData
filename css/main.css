@@ -20,10 +20,17 @@ nav.m-pagenav .inputbox{display:inline-block;margin:30px 0;vertical-align:top;}
 nav.m-pagenav .inputbox input{width:40px;height:40px;line-height:40px;background-color:#fff;font-size:12px;border:1px solid #ddd;border-radius:2px;margin-right:5px;text-align:center;outline:none;}
 nav.m-pagenav .inputbox input:focus{border:1px solid #ddd;}
 nav.m-pagenav .inputbox a{height:40px;width:40px;line-height:40px; border:1px solid #ddd;border-radius:2px;text-align:center;color:#333;display:inline-block;margin-left:5px;}
-/*提示弹出层*/
+/*加载提示弹出层*/
 .tipsmask{position:fixed;top:0;right:0;bottom:0;left:0;z-index:9999;}
 .tipsmask .mask{position:fixed;z-index:10000; top:0;right:0;bottom:0;left:0;background-color:#000;opacity:0.6;filter:alpha(opacity=60);}
 .tipsmask .text{color:#fff;font-size:18px;text-align:center;position:fixed;z-index:10001; left:0;right:0;top:41%;background:url(../imgs/loading.gif) no-repeat center top;padding-top:20px;}
+.common-alert .alert-con{position:fixed;z-index:778;top:35%;left:50%;margin-left:-200px; width:400px;background-color:#fff;border:2px solid #4494e3;}
+.common-alert .alert-con h2{position:relative; background-color:#4494e3;color:#fff;font-size:16px;margin:0;padding:10px;}
+.common-alert .alert-con h2 .m-close{position:absolute;top:5px; right:10px;color:#fff;font-size:20px;cursor:pointer;}
+.common-alert .alert-con .text{font-size:14px;color:#333;padding:20px 10px;text-align:center;}
+.common-alert .alert-con .m-btn-group{text-align:center;padding:10px 0;border-top:1px solid #eee;}
+.common-alert .alert-con .m-btn-group .btn{background-color:#4494e3;color:#fff;border:1px solid #4494e3;padding:3px 12px;font-size:16px;}
+.common-alert .alert-mask{content:''; position:fixed;z-index:777;top:0;right:0;bottom:0;left:0;background-color:#000;opacity:0.6;filter:alpha(opacity=60);}
 /*头部*/
 header { height: 78px; background: url(../imgs/line.jpg) repeat-x; }
 header .container { width: 1200px; }
@@ -307,7 +314,9 @@ footer .con-down .sign{position:absolute;top:29px;left:645px;}
 .peo-body .my-apply-con-01 .itembox li a:hover{color:#fff;background-color:#79b3ed !important;}
 /*个人中心结束*/
 /*数据概述-心血管内科开始*/
-.peo-body .data-summary-con .numsul{padding-left:0;width:663px;margin:22px 15px 7px 15px;;}
+.peo-body .data-summary-con .selhospital{margin:15px 0; padding:15px 15px;background-color:#f9fafb;}
+.peo-body .data-summary-con .selhospital select{width:auto;}
+.peo-body .data-summary-con .numsul{padding-left:0;width:663px;margin:0 15px 7px 15px;;}
 .peo-body .data-summary-con .numsul li{margin-bottom:15px; padding:16px 0 16px 25px; list-style:none;float:left;width:221px;  background-color:#faf9f9;}
 .peo-body .data-summary-con .numsul li span{color:#4494e3;}
 .peo-body .data-summary-con h2{margin:0;padding:5px 15px;font-size:14px;border-bottom:1px solid #f3f3f3;}

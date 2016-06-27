@@ -1,0 +1,28 @@
+﻿{
+  "header": {
+    "message": "success!",
+    "status": "300"
+  },
+  "body": [
+    {
+      "value": 40,
+      "name": "复方丹参"
+    },
+    {
+      "value": 10,
+      "name": "吲哚美辛"
+    },
+    {
+      "value": 20,
+      "name": "硝萘洛尔"
+    },
+    {
+      "value": 5,
+      "name": "沙丁胺醇"
+    },
+    {
+      "value": 15,
+      "name": "头孢曲松钠"
+    }
+  ]
+}

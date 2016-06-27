@@ -70,12 +70,30 @@ function addliPagination($dom, index, current_page) {
     $li.append($a);
     $dom.before($li);
 }
-//提示遮罩弹出层弹出
+//加载提示遮罩弹出层弹出
 function tipsMask_pop(message) {
     var $mask = $('<div class="tipsmask"><div class="mask"></div><div class="text">' + message + '</div></div>');
     $('body').append($mask);
 }
-//提示遮罩弹出层删除
+//加载提示遮罩弹出层删除
 function tipsMask_del() {
     $('.tipsmask').remove();
-}
+};
+//单按钮确认弹出层
+//参数：title弹层标题，text弹层文字内容 
+function common_alert(title, text, callback) {
+    var $alert = $('<div class="common-alert"><div class="alert-con"><h2><span class="m-title">' + title + '</span><span class="m-close">x</span></h2><div class="text">' + text + '</div><div class="m-btn-group"><a class="btn m-btn-sure">确定</a></div></div><div class="alert-mask"></div></div>');
+    $('body').append($alert);
+    //关闭按钮
+    $alert.on('click', '.m-close', function () {
+        $alert.remove();
+    });
+    //确定按钮
+    $alert.on('click', '.m-btn-sure', function () {
+        $alert.remove();
+        if (callback) {
+            callback();
+        }
+    });
+};
+

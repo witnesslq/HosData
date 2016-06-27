@@ -16,6 +16,7 @@
             $sexper_chart.removeClass('hide');
             var dept_name = $(this).attr('dept_name');//科室名字
             var $part_01 = $('#data_summary_con .numsul');//数量数据集体化对象
+            $('#data_summary_con .selhospital select').val('all');//重置默认选择全部医院
             if (dept_name == '妇科') {
                 $sexper_chart.addClass('hide');
             }
@@ -61,147 +62,172 @@
             //        }
             //    }
             //});
+            //疾病TOP数据初始化
+            $.getJSON("../json/data_summary_con05.json", function (res) {
+                if (res.header.status == '300') {
+                    var res = res.body;
+                    echarts.init(document.getElementById('data_summary_con_chart04')).setOption({
+                        title: {
+                            subtext: '疾病',
+                            x: 'center',
+                            subtextStyle: {
+                                color:'#333'
+                            }
+                        },
+                        tooltip: {
+                            trigger: 'item',
+                            formatter: "{b} : {c}%"
+                        },
+                        series: [
+                            {
+                                name: '疾病',
+                                type: 'pie',
+                                radius: '55%',
+                                center: ['50%', '60%'],
+                                data: res,
+                                itemStyle: {
+                                    emphasis: {
+                                        shadowBlur: 10,
+                                        shadowOffsetX: 0,
+                                        shadowColor: 'rgba(0, 0, 0, 0.5)'
+                                    }
+                                },
+                                labelLine: {
+                                    normal: {
+                                        length: 5,
+                                        length2: 3
+                                    }
+                                },
+                            },
+
+                        ]
+                    });
+                }
+            });
+            //用药TOP数据初始化
+            $.getJSON("../json/data_summary_con06.json", function (res) {
+                if (res.header.status == '300') {
+                    var res = res.body;
+                    echarts.init(document.getElementById('data_summary_con_chart05')).setOption({
+                        title: {
+                            subtext: '用药',
+                            x: 'center',
+                            subtextStyle: {
+                                color: '#333'
+                            }
+                        },
+                        tooltip: {
+                            trigger: 'item',
+                            formatter: "{b} : {c}%"
+                        },
+                        series: [
+                            {
+                                name: '用药',
+                                type: 'pie',
+                                radius: '55%',
+                                center: ['50%', '60%'],
+                                data: res,
+                                itemStyle: {
+                                    emphasis: {
+                                        shadowBlur: 10,
+                                        shadowOffsetX: 0,
+                                        shadowColor: 'rgba(0, 0, 0, 0.5)'
+                                    }
+                                },
+                                labelLine: {
+                                    normal: {
+                                        length: 5,
+                                        length2: 3
+                                    }
+                                },
+                            },
+
+                        ]
+                    });
+                }
+            });
+            //检查TOP数据初始化
+            $.getJSON("../json/data_summary_con07.json", function (res) {
+                if (res.header.status == '300') {
+                    var res = res.body;
+                    echarts.init(document.getElementById('data_summary_con_chart06')).setOption({
+                        title: {
+                            subtext: '检查',
+                            x: 'center',
+                            subtextStyle: {
+                                color: '#333'
+                            }
+                        },
+                        tooltip: {
+                            trigger: 'item',
+                            formatter: "{b} : {c}%"
+                        },
+                        series: [
+                            {
+                                name: '用药',
+                                type: 'pie',
+                                radius: '55%',
+                                center: ['50%', '60%'],
+                                data: res,
+                                itemStyle: {
+                                    emphasis: {
+                                        shadowBlur: 10,
+                                        shadowOffsetX: 0,
+                                        shadowColor: 'rgba(0, 0, 0, 0.5)'
+                                    }
+                                },
+                                labelLine: {
+                                    normal: {
+                                        length: 5,
+                                        length2: 3
+                                    }
+                                },
+                            },
+
+                        ]
+                    });
+                }
+            });
             //患者年龄数据初始化
             $.getJSON("../json/data_summary_con02.json", function (res) {
                 if (res.header.status == '300') {
                     var res = res.body;
-                    for (var i = 0, len = res.length; i < len; i++) {
-                        switch (res[i].city) {
-                            case 4301:
-                                res[i].city = '长沙市';
-                                break;
-                            case 4302:
-                                res[i].city = '株洲市';
-                                break;
-                            case 4303:
-                                res[i].city = '湘潭市';
-                                break;
-                            case 4304:
-                                res[i].city = '衡阳市';
-                                break;
-                            case 4305:
-                                res[i].city = '邵阳市';
-                                break;
-                            case 4306:
-                                res[i].city = '岳阳市';
-                                break;
-                            case 4307:
-                                res[i].city = '常德市';
-                                break;
-                            case 4308:
-                                res[i].city = '张家界市';
-                                break;
-                            case 4309:
-                                res[i].city = '益阳市';
-                                break;
-                            case 4310:
-                                res[i].city = '郴州市';
-                                break;
-                            case 4311:
-                                res[i].city = '永州市';
-                                break;
-                            case 4312:
-                                res[i].city = '怀化市';
-                                break;
-                            case 4313:
-                                res[i].city = '娄底市';
-                                break;
-                            case 4331:
-                                res[i].city = '湘西自治州';
-                                break;
-                            default:
-                                res[i].city = '长沙市';
-                        }
-                    };
                     //患者年龄图表初始化
-                    var legend_data = [];//市数组
-                    var series_data = [];//市及年龄数据数组
-                    for (var i = 0, len = res.length; i < len; i++) {
-                        legend_data.push(res[i].city);
-                        var item = {
-                            name: res[i].city,
-                            type: 'scatter',
-                            data: res[i].data
-                        };
-                        series_data.push(item);
-                    };
                     echarts.init(document.getElementById('data_summary_con_chart01')).setOption({
-                        grid: {
-                            left: '7%',
-                            right: '16%',
-                            bottom: '3%',
-                            containLabel: true
-                        },
                         tooltip: {
                             trigger: 'axis',
-                            showDelay: 0,
-                            formatter: function (params) {
-                                if (params.value.length > 1) {
-                                    return params.seriesName + ' :<br/>'
-                                + params.value[0] + '周岁<br/>'
-                                   + '患病人数为' + params.value[1] + '个';
-                                }
-                                else {
-                                    return params.seriesName + ' :<br/>'
-                                       + params.name + ' : '
-                                       + params.value + '个';
-                                }
-                            },
                             axisPointer: {
-                                show: true,
-                                type: 'cross',
-                                lineStyle: {
-                                    type: 'dashed',
-                                    width: 1
-                                }
-                            }
+                                type: 'shadow'
+                            },
+                            formatter: '年龄：{b}<br />患者数量：{c}'
                         },
-                        legend: {
-                            data: legend_data,
-                            itemGap: 11,
-                            top: '55px',
-                            right: 'right',
-                            orient: 'vertical'
+                        grid: {
+                            left: '3%',
+                            right: '14.5%',
+                            bottom: '3%',
+                            top: '10%',
+                            containLabel: true
                         },
-                        xAxis: [
-                        {
+                        xAxis: {
+                            type: 'category',
+                            data: res.ages,
+                            name: '患者年龄（岁）'
+                        },
+                        yAxis: {
                             type: 'value',
-                            name: '患者年龄',
-                            nameGap: 5,
+                            name: '患者数量（个）',
                             nameTextStyle: {
-                                fontSize: 14
+                                fontSize: 14,
+                                color: '#333'
                             },
-                            scale: true,
-                            axisLabel: {
-                                formatter: '{value}'
-                            },
-                            splitLine: {
-                                lineStyle: {
-                                    type: 'dashed'
-                                }
+                            boundaryGap: [0, 0.01]
+                        },
+                        series: [
+                            {
+                                type: 'bar',
+                                data: res.nums
                             }
-                        }
-                        ],
-                        yAxis: [
-            {
-                type: 'value',
-                name: '患者数量（单位：个）',
-                nameGap: 25,
-                nameTextStyle: {
-                    fontSize: 14
-                },
-                scale: true,
-                axisLabel: {
-                    formatter: '{value}'
-                },
-                splitLine: {
-                    lineStyle: {
-                        type: 'dashed'
-                    }
-                }
-            }
-                        ],
-                        series: series_data
+                        ]
                     });
                 }
             });
@@ -480,7 +506,7 @@
             //    }
             //});
             //地域图表初始化
-            $.getJSON("../json/test.json", function (res) {
+            $.getJSON("../json/data_summary_con04.json", function (res) {
                 if (res.header.status == '300') {
                     var res = res.body;
                     var lastres = [{ 'name': '长沙市', value: 0 }, { 'name': '株洲市', value: 0 }, { 'name': '湘潭市', value: 0 }, { 'name': '衡阳市', value: 0 }, { 'name': '邵阳市', value: 0 }, { 'name': '岳阳市', value: 0 }, { 'name': '常德市', value: 0 }, { 'name': '张家界市', value: 0 }, { 'name': '益阳市', value: 0 }, { 'name': '郴州市', value: 0 }, { 'name': '永州市', value: 0 }, { 'name': '怀化市', value: 0 }, { 'name': '娄底市', value: 0 }, { 'name': '湘西土家族苗族自治州', value: 0 }];
@@ -545,7 +571,7 @@
                         chart.setOption({
                             tooltip: {
                                 trigger: 'item',
-                                formatter: '{b}<br/>{a}<br/>患者占比{c}%'
+                                formatter: '{b}<br/>{a}<br/>患者：{c}个'
                             },
                             series: [{
                                 type: 'map',
@@ -1129,7 +1155,16 @@
             return false;
         }
         if (event.keyCode == '38') {
-            alert('向上');
+            var activeindex = $ul.find('.active').index();
+            var lisize = $ul.find('li').length;
+            if (activeindex >= 0) {
+                activeindex--;
+                activeindex = activeindex % lisize;
+            } else {
+                activeindex = lisize - 1;
+            }
+            $ul.find('li').removeClass('active');
+            $ul.find('li').eq(activeindex).addClass('active');
             return false;
         } else if (event.keyCode == '40') {
             var activeindex = $ul.find('.active').index();
@@ -1137,6 +1172,8 @@
             if (activeindex >= 0) {
                 activeindex++;
                 activeindex = activeindex % lisize;
+            } else {
+                activeindex = 0;
             }
             $ul.find('li').removeClass('active');
             $ul.find('li').eq(activeindex).addClass('active');
@@ -1215,7 +1252,9 @@
             }
         });
         if (has_sameitem) {
-            alert('不要选择重复的选项,请重新选择！');
+            common_alert('友情提示', '不要选择重复的选项，请重新选择！', function () {
+                $target.focus();
+            });
             hide_search_item_box();
             return;
         }
@@ -1255,7 +1294,7 @@
                 minView: 'month'
             }).on('changeDate', function (ev) {
                 if ($start_input.val() == '') {
-                    alert('请选择开始时间!');
+                    common_alert('友情提示', '请选择开始时间！');
                     $end_input.val('');
                     return false;
                 }
@@ -1263,7 +1302,7 @@
                     var starttimes = new Date($start_input.val()).getTime();
                     var endtimes = new Date($end_input.val()).getTime();
                     if (parseInt(starttimes) > parseInt(endtimes)) {
-                        alert('开始时间不能大于结束时间，请重新选择')
+                        common_alert('友情提示', '开始时间不能大于结束时间，请重新选择！');
                         $end_input.val('');
                         return false;
                     }
